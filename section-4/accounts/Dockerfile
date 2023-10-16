@@ -19,3 +19,30 @@ COPY target/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar
 # below is similar to doing java -jar accounts-0.0.1-SNAPSHOT.jar in commmand line
 # which runs jar file
 ENTRYPOINT ["java", "-jar", "accounts-0.0.1-SNAPSHOT.jar"]
+
+
+#Challenges of using Dockerfile approach
+# 1. for small apps it's easy, but when app is big you need lot of configuration inside Dockerfile
+# 2. docker commands, you need know all low level docker commands
+# 3. You've to maintain Dockerfiles for all your microservices, which is nightmare
+# 4. You cannot ignore security of your docker image, that also should be taken care of
+
+#To overcome these challenges we've two more appraoches which are google jib and buildpacks
+#above two will make creating docker images easy, without using dockerFile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
