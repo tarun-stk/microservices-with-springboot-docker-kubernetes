@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.eazybytes</groupId>
 	<artifactId>cards</artifactId>
+<!--	<packaging>jar</packaging>-->
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cards</name>
 	<description>Cards Microservice for Eazy Bank application</description>
@@ -79,6 +80,24 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+
+<!--			google jib related plugin
+				used to generate docker images
+				add this plugin and run mvn command from root folder(where pom.xml is present)
+				command: mvn compile jib:dockerBuild
+				above will generated docker image without the need of dockerfile
+				then you can execute command:  docker run -p 9000:9000 tarunkumarstk/cards:s4
+				to create and run a docker container of that particular docker image-->
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
+				<configuration>
+					<to>
+						<image>tarunkumarstk/${project.artifactId}:s4</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>

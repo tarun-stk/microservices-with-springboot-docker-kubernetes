@@ -73,6 +73,21 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+
+<!--					generating docker image using second method, buildpacks-->
+
+<!--					<image> tag is to generate a docker image-->
+<!--					and <name> tag is to give a name for the docker image-->
+<!--					${project.artifactId} takes name of artifactId dynamically in this case it is loans
+						from <artifactId>loans</artifactId> tags -->
+
+<!--					now you can generate docker image using mvn command
+						the command is
+						mvn spring-boot:build-image-->
+<!--					behind the scenes it will run the build pack and generate a docker image-->
+					<image>
+						<name>tarunkumarstk/${project.artifactId}:s4</name>
+					</image>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
