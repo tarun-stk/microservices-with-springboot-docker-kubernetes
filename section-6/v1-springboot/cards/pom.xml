@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.eazybytes</groupId>
-	<artifactId>loans</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>cards</artifactId>
 	<packaging>jar</packaging>
-	<name>loans</name>
-	<description>Cards Microservice</description>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>cards</name>
+	<description>Cards Microservice for Eazy Bank application</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -70,31 +70,21 @@
 
 	<build>
 		<plugins>
+<!--			google jib related plugin
+				used to generate docker images
+				add this plugin and run mvn command from root folder(where pom.xml is present)
+				command: mvn compile jib:dockerBuild
+				above will generated docker image without the need of dockerfile
+				then you can execute command:  docker run -p 9000:9000 tarunkumarstk/cards:s4
+				to create and run a docker container of that particular docker image-->
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
 				<configuration>
-
-<!--					generating docker image using second method, buildpacks-->
-
-<!--					<image> tag is to generate a docker image-->
-<!--					and <name> tag is to give a name for the docker image-->
-<!--					${project.artifactId} takes name of artifactId dynamically in this case it is loans
-						from <artifactId>loans</artifactId> tags -->
-
-<!--					now you can generate docker image using mvn command
-						the command is
-						mvn spring-boot:build-image-->
-<!--					behind the scenes it will run the build pack and generate a docker image-->
-					<image>
-						<name>tarunkumarstk/${project.artifactId}:s4</name>
-					</image>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
+					<to>
+						<image>tarunkumarstk/${project.artifactId}:s6</image>
+					</to>
 				</configuration>
 			</plugin>
 		</plugins>

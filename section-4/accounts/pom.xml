@@ -10,6 +10,7 @@
 	</parent>
 	<groupId>com.eazybytes</groupId>
 	<artifactId>accounts</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>accounts</name>
 	<description>Accounts Microservice</description>

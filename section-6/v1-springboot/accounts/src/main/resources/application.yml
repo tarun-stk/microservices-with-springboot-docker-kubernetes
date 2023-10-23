@@ -1,0 +1,63 @@
+#introduction to spring profiles
+
+#this is default profile
+#default profile, always loads by default
+#move only those pros that will change when environment changes.
+#we decide that h2 db, and port info remains same
+#so prod and qa yml files will have info of build-version and contact details only
+
+#by default all the values wil be loaded from this file
+#when environment changes and profile changes, then the values of this profile will
+#be just overridden with values present in selected profile.
+
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    datasource-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#telling springboot that we've defined more profilee and these are the names of the yml files
+#  these should be inside spring property
+  config:
+    import:
+      - "application_qa.yml"
+      - "application_prod.yml"
+#  definining active profiles
+#  telling spring boot to run on qa profile, instead of running default profile
+#  by using this approach, we've to change profiles in each env and generate different images, this won't allow
+#  us to create immutable code base
+#  so to overcome this approach, we've to find a way where we can change profile dynamically while starting the app, using external variables
+#  we'll expolore those way in next lectures
+  profiles:
+    active:
+#      should be same as you've defined in qa yml file
+#      spring:
+#        config:
+#          activate:
+#            on-profile: "qa"
+      - "qa"
+
+build:
+  version: "3.0"
+
+#creating some random properties for the sake of @ConfigurationProperties demo
+#here accounts act as prefix for all embedded props
+#to access these in form of POJO you can either use java class or record(will be using this approach)
+accounts:
+  message: "Welcome to EazyBank accounts related local APIs "
+  contactDetails:
+    name: "John Doe - Developer"
+    email: "john@eazybank.com"
+  onCallSupport:
+    - (555) 555-1234
+    - (555) 523-1345

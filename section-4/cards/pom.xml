@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.eazybytes</groupId>
 	<artifactId>cards</artifactId>
-<!--	<packaging>jar</packaging>-->
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cards</name>
 	<description>Cards Microservice for Eazy Bank application</description>

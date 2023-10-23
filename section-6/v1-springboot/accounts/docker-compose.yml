@@ -1,0 +1,49 @@
+
+#to build and run docker images/containers, we've to run the same command for different images
+#if you've 100 microservices you've to run that command 100 times
+#to overcome this challenge, we've docker compose, using docker-compose file we can run any number of containers at a single time
+
+# docker-compose file can be placed in any of the microservices, that are mentioned in this file
+# this should be placed in project's root folder
+
+services:  # name the names of services
+  accounts:  #Microservice name
+    image: "tarunkumarstk/accounts:s4"  # docker image name
+    container_name: accounts-ms  #docker randomly gives name for it's docker images, if you
+    # want to explicity mention a name then yu can use this, if u like this then the container name will be generated as same
+    ports:  # list of ports that you can give here
+      - "8080:8080"
+    deploy:  # deployment instructions
+      resources:
+        limits:
+          memory: 700m  # we're giving max memory for this microservice as 700mb
+    networks:  # list of networks where this microservice will run
+      - eazybank  # accounts ms will run in eazybank network
+  loans:
+    image: "tarunkumarstk/loans:s4"
+    container_name: loans-ms
+    ports:
+      - "8090:8090"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+  cards:
+    image: "tarunkumarstk/cards:s4"
+    container_name: cards-ms
+    ports:
+      - "9000:9000"
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - eazybank
+networks:  # list of all networks
+  eazybank: # defining eazybank network
+    driver: "bridge" # allowing bridging feature in eazybank network
+    # if in future we've to communicate between accounts, loans & cards microservice, then they should be running same network
+    # that's why we defined same network in each of the microservice network config
+    # when "bridge" driver is given thent it forms bridge between all three microservices, so that we can communicate

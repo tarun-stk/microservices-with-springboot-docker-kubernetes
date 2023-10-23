@@ -1,0 +1,61 @@
+Different forms of generating docker images
+
+	1. Using Dockerfile
+		- you've to add a file no extension named Dockerfile inside root folder, so that docker will identify this file
+		- You need to give some docker commands like MAINTAINER - who maintains this image information 
+			- FROM dockerimage:tagname, dockerimage:tagname -> indicates a dependency for example, dockerimage:tagname
+				indicates that our proj is depended upon java 17
+			- ENTRYPOINT ["java", "-jar", "accounts-0.0.1-SNAPSHOT.jar"], this tells that whenever this image
+				is build to create container, use this command internally to start the app.
+			- COPY target/accounts-0.0.1-SNAPSHOT.jar accounts-0.0.1-SNAPSHOT.jar -> copies jar to image.
+			
+		Advantages:
+			U can customize your docker image, based on Dockerfile by adding docker commands.
+		Disadvantages:
+			U must know docker commands very well to write Dockerfile
+			U must maintain Dockerfiles for all the microservices
+			
+	2. Using buildpacks
+		- for this approach you don't have to create any Dockerfile, which means no docker commands are used
+		- you've to just add below thing in pom.xml under configuration tag inside plugins section 
+					<image>
+						<name>tarunkumarstk/${project.artifactId}:s4</name>
+					</image>
+			tarunkumarstk/${project.artifactId}:s4 -> indicates the name of docker image
+			${project.artifactId} -> this dynamically takes the artifactId that you've given during the project creation
+		- After above steps u can use mvn command (mvn spring-boot:build-image) to generate docker image
+			note: you should run above command in root folder(where pom.xml is present)
+		- By running command, docker takes all the dependencies that are available in pom and adds them accordingly to the image
+		- Behing the scenes it will run the build pack and generate a docker image
+		
+		Advantages:
+			U will get docker image just by adding few tags inside plugins and running the corresponding mvn command
+			U don't have to know docker commands
+		Disadvantages:
+			U will get docker image like however buildpacks will generate, u cannot customize the image
+		
+	3. Using google jib
+		- for this approach you don't have to create any Dockerfile, which means no docker commands are used
+		- you've to just add below thing in pom.xml under plugins section 
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
+				<configuration>
+					<to>
+						<image>tarunkumarstk/${project.artifactId}:s4</image>
+					</to>
+				</configuration>
+			</plugin>
+			
+		- add this plugin and run mvn command from root folder(where pom.xml is present)
+				command: mvn compile jib:dockerBuild
+		- above will generated docker image without the need of dockerfile
+				then you can execute command:  docker run -p 9000:9000 tarunkumarstk/cards:s4
+				to create and run a docker container of that particular docker image
+				
+		Advantages:
+			U will get docker image just by adding one plugin, and running a maven plugin
+			U don't have to know docker commands
+		Disadvantages:
+			U will get docker image like however buildpacks will generate, u cannot customize the image

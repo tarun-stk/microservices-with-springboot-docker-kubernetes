@@ -1,0 +1,56 @@
+DOCKER commands:
+
+	docker built . -t <username>/<microservicename>:<tagname>
+	- building the docker image, first go to root project folder where you've Dockerfile then open cmd and execute this command
+	- this will generate docker image with name that you've given in place of microservicename
+	- and tagname will be what you've given in place of tagname
+	- this is the standard way of creating docker images, always follow username/microservicename:tagname  -> this pattern
+	- username is nothing but your docker username
+	
+	docker ps
+	- lists down all running containers
+	
+	docker start <container_id>
+	- starts running the container with container_id
+	
+	docker stop <container_id>
+	- stops running the container with container_id
+	
+	docker run -p 8080:8080 tarunkumarstk/accounts:s4
+	- creates the container for the given docker image(tarunkumarstk/accounts:s4) on port 8080
+	- when you do this all the logs of app will be running in cmd, and you can't do anything parallely in cmd
+	- as we're seeing app logs
+	- if you want to want to run container,and don't want to see any logs use below command
+	docker run -d -p 8080:8080 tarunkumarstk/accounts:s4
+	- -d means detached, run in detached mode, now cmd won't show any app logs
+	
+	docker image push <repo>/<dockerimagename:tagname>
+	docker image push docker.io/tarunkumarstk/accounts:s4
+	- pushing docker image, tarunkumarstk/accounts:s4 to docker hub (docker.io)
+	- tarunkumarstk/accounts:s4  -> docker image 
+	- docker.io -> pushing into docker hub
+	
+	docker pull <dockerimagename>:<tagname>
+	- this command pulls the docker image from remote repo to local repo, docker desktop.
+	
+	docker compose up
+	- you should run this command from root location of project where docker-compose.yml file is present
+	- when you run this command it will run all containers(microservices) that are listed in docker-compose.yml file
+	- if you try to run this command from folder where docker-compose.yml file is not present, then it say no configuration file provided 
+	- when you run this command you will all the app logs in the cmd, which will make your cmd busy
+	- if you don't want to see logs, and want to run other commands in same cmd, then you can use this command in detached mode
+	- that command is
+		docker compose up -d
+	- if you do 'docker compose up' twice, first time it will create containers from scratch, for the second command
+		it will just start the created containers.
+	
+	docker compose down
+	- you should run this command from root location of project where docker-compose.yml file is present
+	- when you run this command it will stop and delete all containers(microservices) that are listed in docker-compose.yml file
+	
+	docker compose stop
+	- same as 'docker compose down' but this will just stop the running containers, and will not delete them
+	
+	docker compose start
+	- this will start running the containers, but you've to make sure that containers are there(not deleted)
+	
