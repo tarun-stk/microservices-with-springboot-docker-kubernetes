@@ -1,0 +1,51 @@
+Different ways of activating spring profiles using externables
+	1. Using Command line (highest precedence)
+	2. Using JVM system variables
+	3. Using environment variables
+	
+	1. Command line:
+		-when using these approach, this has the highest precedence, if you've some properties defined in application.properties(build.version=1.0) file
+			and if you give some other value for the same thing using command line(--build.version=1.5), then values mentioned in properties file 
+			will be overriden with values that are given with command line.
+		ex: --spring.profiles.active = prod --build.version = 1.5
+			In the above example, saying to use prod profile, and make build.version as 1.5
+			Note: using command line each of the key value pair must precede with "--"
+				and if you've multiple key value pairs, separate them with space(" ")
+				
+		To work with this we can use intellij ide:
+		select class that has main method, and right click > select modify run configuration.. > select text field named program arguments
+		under build and run section > give input --spring.profiles.active = prod --build.version = 1.5 > click apply > run your app in debug mode
+		and see the profile being set and particular property being applied.
+		
+	2. JVM system variables
+		-when using these approach, this has the second highest precedence after command line, if you've some properties defined in application.properties(build.version=1.0) file
+			and if you give some other value for the same thing using JVM system variables(-Dbuild.version=1.5), then values mentioned in properties file 
+			will be overriden with values that are given with JVM system variables.
+		ex: -Dspring.profiles.active = prod -Dbuild.version = 1.5
+			In the above example, saying to use prod profile, and make build.version as 1.5
+			Note: using JVM system variables each of the key value pair must precede with "-D"
+				and if you've multiple key value pairs, separate them with space(" ")
+				
+		To work with this we can use intellij ide:
+		select class that has main method, and right click > select modify run configuration.. > by default you won't find vm options, so you can add this
+		by clicking on modify options under Build and run section, then click on add vm options > then in VM options field give value (-Dspring.profiles.active = prod -Dbuild.version = 1.5)
+		> click on apply > click on ok > run app in build mode 
+			you can see the changes being applied.
+			
+	3. environment variables:
+		-when using these approach, this has the third highest precedence after JVM system variables, if you've some properties defined in application.properties(build.version=1.0) file
+			and if you give some other value for the same thing using environment variables(BUILD_VERSION=1.5), then values mentioned in properties file 
+			will be overriden with values that are given with system variables.
+			
+		ex: SPRING_PROFILES_ACTIVE=prod; BUILD_VERSION=1.5
+			In the above example, saying to use prod profile, and make build.version as 1.5
+			Note: using system variables each of the key must be in capital letters and "." must be replaced with "_"
+				for values there's no change
+				and if you've multiple key value pairs, separate them with semi colon(";")
+				
+		To work with this we can use intellij ide:
+		select class that has main method, and right click > select modify run configuration.. > select field named environment variables under Build and run section > 
+		then give "SPRING_PROFILES_ACTIVE=prod; BUILD_VERSION=1.5" > click on apply & ok.
+		you can see the changes being applied.
+		
+	If in case you've all these approaches being used for same app, then the properties will be considered based on precedence that mentioned.
