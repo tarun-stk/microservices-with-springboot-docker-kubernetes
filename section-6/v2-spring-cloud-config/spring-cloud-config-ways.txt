@@ -1,0 +1,28 @@
+Three ways of activating profiles, using spring cloud config:
+	1. Using classpath:
+		- here you will have configserver app, in which you'll maintain all your yml files(profiles) 
+		- accordingly you will access these properties for your microservices using their prop file.
+		- search them using search-locations: "classpath:/config"
+		Advantages:
+			we're no more maintaining multiple profile files in microservices, now configserver is maintaining them
+		Disadvantages:
+			still the files are visible in configserver, can be security issue
+	
+	2. Using file system:
+		- again you'll have configserver app, but profiles are moved into some other location on your computer.
+		- you'll search them using search-locations: "file///[location of config folder inside machine]"
+		Advantages:
+			Yu can lock this folder, so that not everyone can view them
+		Disadvantages:
+			you cannot track the changes made to them
+			
+	2. Using repository:
+		- again you'll have configserver app, but profiles are moved into some remote repo.
+		- you'll search them using search-locations: 
+			        git:
+						uri: "https://github.com/eazybytes/eazybytes-config.git"
+		Advantages:
+			repository can be made private
+			you can track different versions of repo using versioning
+			you can go back and come to present at any moment
+			best approach as of now

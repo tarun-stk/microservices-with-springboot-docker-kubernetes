@@ -25,7 +25,7 @@ public class AccountsDto {
 //    when using example value inside @Schema anno, this value will appear inside schemas & also
 //    for sample input inside api call request
 //    when example is not used, then "string" will appear instead of some sample data,
-//    example should be ignored if you have multiple possible values like positive and negative responses
+//    example should be ignored if you have multiple possible values like positive and negative reponses
 //    so instead of showing either positive or negative value, we can just ignore this to avoid confusion
     @Schema(
             description = "Account Number of Eazy Bank account", example = "3454433243"

@@ -2,6 +2,7 @@ package com.eazybytes.accounts.controller;
 
 
 import com.eazybytes.accounts.constants.AccountsConstants;
+import com.eazybytes.accounts.dto.AccountsContactInfoDto;
 import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.dto.ErrorResponseDto;
 import com.eazybytes.accounts.dto.ResponseDto;
@@ -14,47 +15,55 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-// Giving name and description for this api controller class, which will reflect in swagger home page.
-//by default it shows as *accounts-controller*, we're overriding this with name attribute in @Tag anno
 @Tag(  // open api related anno
         name = "CRUD REST APIs for Accounts in EazyBank",
         description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE account details"
 )
 @Validated // -> allows validation
-@AllArgsConstructor // -> when using this @Autowired anno not required, constructor injection takes place for all the fields inside this class
 @RestController
+@NoArgsConstructor
 @RequestMapping(value = "/api/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
 public class AccountsController {
 
-
-//    Notes on @Valid
-//    @Valid can only be used with dtos
-//    to perform validation on other things like query params, as these are not dto's, validation won't happen
-//    so we've to handle validation here itself.
-
-//    when user tries with invalid data these validations will throw exceptions, to handle these exceptions
-//    and give appropriate messages, we've to extend ResponseEntityExceptionHandler in GlobalException class
-//    then override handleMethodArgumentNotValid method.
-
-//    @Autowired
     private IAccountsService accountsService;
 
+    @Value("${build.version}")
+//    using first approach of configuration in spring boot
+//    we can retrieve values from application.yml file using @VAlue anno
+//    but as we are hardcoing value inside @Value anno, it is not best practice, also if you've
+//    100s of values you've do mention @Value anno for 100 times, not good approach
+    private String buildVersion;
 
-//    giving summary & description for this api call, which will reflect in swagger home page
+    @Autowired
+//    second approach of configuration in spring boot
+//    using this we can get details of environment setup on our sys, like JAVA_HOME & MAVEN_HOME
+//    still not good approach as we've hard code values.
+    private Environment environment;
+
+    @Autowired
+//    third approach, which is widely used, and will overcomes disadvantages of using @Value anno & Environment interface
+    private AccountsContactInfoDto accountsContactInfoDto;
+
+    @Autowired
+//    constructor injection, when you've single constructor autowired anno is optional
+    public AccountsController(IAccountsService accountsService){
+        this.accountsService = accountsService;
+    }
+
+
     @Operation( //open api related anno
             summary = "Create Account REST API",
             description = "REST API to create new Customer &  Account inside EazyBank"
     )
-//    showing what all api responses this api call will produce, will reflect in swagger homepage
-//    when you have different api responses for single api call
-//    then u should use  @ApiResponses anno, and inside that you can define individual api responses using @ApiResponse
     @ApiResponses({
             @ApiResponse(
                     responseCode = "201",
@@ -181,6 +190,85 @@ public class AccountsController {
         }
     }
 
+    @Operation(
+            summary = "Get Build information",
+            description = "Get Build information that is deployed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/build-info")
+    public ResponseEntity<String> getBuildInfo(){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(buildVersion);
+    }
+
+    @Operation(
+            summary = "Get Java version",
+            description = "Get Java versions details that is installed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/java-version")
+    public ResponseEntity<String> getJavaVersion() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+//                hard coding values using getProperty
+//                also we've to do this 100 times, if you need 100 values.
+//                this gives the location of our JAVA_HOME value.
+//                when setting up env variables, we give key and value, key example is JAVA_HOME, MAVEN_HOME
+//                VALUE example is C:\Program Files\Java\jdk-17
+                .body(environment.getProperty("JAVA_HOME"));
+    }
+
+    @Operation(
+            summary = "Get Java version",
+            description = "Get Java versions details that is installed into accounts microservice"
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "HTTP Status OK"
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "HTTP Status Internal Server Error",
+                    content = @Content(
+                            schema = @Schema(implementation = ErrorResponseDto.class)
+                    )
+            )
+    }
+    )
+    @GetMapping("/contact-info")
+    public ResponseEntity<AccountsContactInfoDto> getContactInfo() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(accountsContactInfoDto);
+    }
 
 }
 

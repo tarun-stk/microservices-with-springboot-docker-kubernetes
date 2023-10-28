@@ -1,0 +1,51 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#    giving name to the app, which should be same as the yml file inside src/main/resources/config folder
+#  so that it can match to the particular yml file
+  application:
+    name: "accounts"
+#    activating prod profile
+#  so now, inside configserver, this will activate all the properties inside "accounts-prod.yml" file
+  profiles:
+    active: "prod"
+#    importing config server instead of profiles like in previous appraoch
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+#since we're not using below profiles, commenting out
+#  from now we will get prod and qa profile infos from configserver
+#  config:
+#    import:
+#      - "application_qa.yml"
+#      - "application_prod.yml"
+#since we don;t have qa profile, we cannot activate it, so comment out
+#  profiles:
+#    active:
+#      - "qa"
+
+
+#below props are already defined in configserver, so they'll come from there
+#build:
+#  version: "3.0"
+#
+#accounts:
+#  message: "Welcome to EazyBank accounts related local APIs "
+#  contactDetails:
+#    name: "John Doe - Developer"
+#    email: "john@eazybank.com"
+#  onCallSupport:
+#    - (555) 555-1234
+#    - (555) 523-1345

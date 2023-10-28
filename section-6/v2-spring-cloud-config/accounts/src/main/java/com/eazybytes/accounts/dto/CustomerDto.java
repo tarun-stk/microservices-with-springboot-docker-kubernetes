@@ -23,7 +23,7 @@ public class CustomerDto {
 //    @Size(min = 5, max = 30, message = "") -> must be of given limits, if not satisfied given message will be displayed
 //    @Email -> checks for email format
 
-//    when not using name param in @Schema anno, fieldname will be used
+//    when not usign name param in @Schema anno, fieldname will be used
     @Schema(
             description = "Name of the customer", example = "Eazy Bytes"
     )
@@ -44,7 +44,7 @@ public class CustomerDto {
     @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number must be of size 10 and can contain only digits")
     private String mobileNumber;
 
-//    schema not required as we will describe then AccountsDto class itself
+//    schema not required as we will descrieb then AccountsDto class itself
     private AccountsDto accountsDto;
 
 }
