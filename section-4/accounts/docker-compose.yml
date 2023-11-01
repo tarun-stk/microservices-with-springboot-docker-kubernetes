@@ -44,6 +44,6 @@ services:  # name the names of services
 networks:  # list of all networks
   eazybank: # defining eazybank network
     driver: "bridge" # allowing bridging feature in eazybank network
-    # if in future we've to communicate between accounts, loans & cards microservice, then they should be running same network
+    # if in future we've to communicate between accounts, loans & cards microservice, then they should be running on same network
     # that's why we defined same network in each of the microservice network config
-    # when "bridge" driver is given thent it forms bridge between all three microservices, so that we can communicate
+    # when "bridge" driver is given then it forms bridge between all three microservices, so that we can communicate

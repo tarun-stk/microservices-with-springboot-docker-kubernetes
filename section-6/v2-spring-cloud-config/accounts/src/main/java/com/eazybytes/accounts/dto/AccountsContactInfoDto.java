@@ -1,13 +1,7 @@
 package com.eazybytes.accounts.dto;
 
-//Notes on java record:
-//observe that this is not class but record
-//records were introduced in java 17
-//to work with final fields, and no setters
-//fields that you've inside params, are by default final, and java by default creates those final fields, getters & constructor for them
-//make sure field types match with those that you've mentioned in application.yml file
-//also fieldnames should match with application.yml keys(fieldname)
-
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
@@ -23,6 +17,16 @@ import java.util.Map;
 //@ConfigurationProperties(prefix = "accounts") when using this, all the values of params inside AccountsContactInfoDto(String message, Map<String, String> contactDetails, List<String> onCallSupport)
 //will be assigned from prefix accounts from application.yml file, and they will be final, cannot be changed
 
+
+//later updated this class to java class
+//so that we can update fields inside this class
+//in future if we want to change properties inside yml file, those should be changed it can only be possible using setters
+//so change this record to java class
 @ConfigurationProperties(prefix = "accounts")
-public record AccountsContactInfoDto(String message, Map<String, String> contactDetails, List<String> onCallSupport) {
+@Getter @Setter
+public class AccountsContactInfoDto {
+
+    private String message;
+    private Map<String, String> contactDetails;
+    private List<String> onCallSupport;
 }

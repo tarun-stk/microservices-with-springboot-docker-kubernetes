@@ -9,8 +9,9 @@ spring:
 
 #giving native as the profile
   profiles:
-    active: native
-
+#    active: native
+#    activating git as profile
+    active: git
   cloud:
     config:
       server:
@@ -33,7 +34,7 @@ spring:
 #            change native to git saying that we're using git appraoch now
 #            also update uri to github repo url
         git:
-          uri: "https://github.com/eazybytes/eazybytes-config.git"
+          uri: "https://github.com/tarun-stk/tarun-stk-config.git"
 #          mention which branch
           default-label: main
 #          mention time out, if connection not established within this many seconds, please stop processing & immediately throw exception
@@ -45,6 +46,21 @@ spring:
 #          because if you've cloned local repo, then if you've made changes in local, it will cause issues,
 #          always use remote master repo to works
           force-pull: true
+  #rabbit mq related props, giving all default values, if you don;t even mention this
+  #  boot will recognize them because these are default values
+  rabbitmq:
+    host: "localhost"
+    port: 5672
+    username: "guest"
+    password: "guest"
+
+#boot actuator related prop, enabling all management related endpoints like, refresh, bus refresh
+#  by default only health endpoint is exposed
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 
 

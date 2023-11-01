@@ -1,6 +1,6 @@
 DOCKER commands:
 
-	docker built . -t <username>/<microservicename>:<tagname>
+	docker build . -t <username>/<microservicename>:<tagname>
 	- building the docker image, first go to root project folder where you've Dockerfile then open cmd and execute this command
 	- this will generate docker image with name that you've given in place of microservicename
 	- and tagname will be what you've given in place of tagname

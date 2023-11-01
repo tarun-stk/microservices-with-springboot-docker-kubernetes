@@ -9,7 +9,7 @@ Three ways of activating profiles, using spring cloud config:
 			still the files are visible in configserver, can be security issue
 	
 	2. Using file system:
-		- again you'll have configserver app, but profiles are moved into some other location on your computer.
+		- again you'll have configserver app, but profiles(config props) are moved into some other location on your computer.
 		- you'll search them using search-locations: "file///[location of config folder inside machine]"
 		Advantages:
 			Yu can lock this folder, so that not everyone can view them
@@ -17,7 +17,7 @@ Three ways of activating profiles, using spring cloud config:
 			you cannot track the changes made to them
 			
 	2. Using repository:
-		- again you'll have configserver app, but profiles are moved into some remote repo.
+		- again you'll have configserver app, but profiles(config props) are moved into some remote repo.
 		- you'll search them using search-locations: 
 			        git:
 						uri: "https://github.com/eazybytes/eazybytes-config.git"

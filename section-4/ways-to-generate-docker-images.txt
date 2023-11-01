@@ -26,7 +26,7 @@ Different forms of generating docker images
 		- After above steps u can use mvn command (mvn spring-boot:build-image) to generate docker image
 			note: you should run above command in root folder(where pom.xml is present)
 		- By running command, docker takes all the dependencies that are available in pom and adds them accordingly to the image
-		- Behing the scenes it will run the build pack and generate a docker image
+		- Behind the scenes it will run the build pack and generate a docker image
 		
 		Advantages:
 			U will get docker image just by adding few tags inside plugins and running the corresponding mvn command
