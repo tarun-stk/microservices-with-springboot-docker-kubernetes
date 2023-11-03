@@ -1,0 +1,48 @@
+Refresh configurations at runtime using spring cloud bus & spring cloud config monitor
+	
+	The problem:
+		we can detect changes configurations in remote repo, but to refresh them we're currently
+		manually running refresh or busrefresh api's on microservices, 
+		so to automate this process, we've concept of using webhooks
+		webhooks are available in almost all the versioning control systems like gitlab, bitbucket and github
+		
+	To work with this:
+		firstly you've to add actuator dependency in configserver app
+		and also add below dependency
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-config-monitor</artifactId>
+			</dependency>
+		also enable all the management related endpoints for boot actuator so that we can access refresh & busrefresh apis
+				management:
+				  endpoints:
+					web:
+					  exposure:
+						include: "*"
+		also add rabbitMQ related information in applications file
+			  rabbitmq:
+				host: "localhost"
+				port: 5672
+				username: "guest"
+				password: "guest"
+		
+		
+		now coming to the github side changes, go to config props repo > click on settings > click on add webhooks
+		
+		in webhook url, as we're still working with localhost system, but github cannot communicate to local system
+		it will expect some DNS 
+		to work with localhost, we've solution we can generate some url which will redirect the request to our local system
+		we can do above using hookdeck
+		localhost url: http://localhost:8071/monitor
+		when you follow steps in hookdeck website, you will get a url that will redirect request to local system localhost
+		
+		
+		so whenever a change triggers in your config props repo, behind the scenes webhook sends a request to the url that you've kept.
+		
+		behind the scenes monitor api call, will call busrequest api and updates all the props to remote props
+		
+		so by doing this we're making sure that no manual efforts are involved, and the application is completely automated
+		
+		
+		
+		

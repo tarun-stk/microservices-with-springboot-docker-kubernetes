@@ -32,6 +32,13 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
 		</dependency>
+		<!--Config server github webhook related dependency
+		whenever a change triggers in remote repo, the webhook will send a POST request with url:
+		localhost:8071/monitor which refreshes all the properties from remote repo-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-config-monitor</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

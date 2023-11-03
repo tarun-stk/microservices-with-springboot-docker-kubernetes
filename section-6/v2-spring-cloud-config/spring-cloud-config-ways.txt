@@ -2,9 +2,9 @@ Three ways of activating profiles, using spring cloud config:
 	1. Using classpath:
 		- here you will have configserver app, in which you'll maintain all your yml files(profiles) 
 		- accordingly you will access these properties for your microservices using their prop file.
-		- search them using search-locations: "classpath:/config"
+		- search them using search-locations: "classpath:/config" -> cofig is a folder inside configserver app > resources folder
 		Advantages:
-			we're no more maintaining multiple profile files in microservices, now configserver is maintaining them
+			we're no more maintaining multiple profile files in each microservice, now configserver is maintaining them
 		Disadvantages:
 			still the files are visible in configserver, can be security issue
 	

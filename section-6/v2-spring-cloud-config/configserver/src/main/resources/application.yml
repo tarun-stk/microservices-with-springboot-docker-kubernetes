@@ -28,7 +28,7 @@ spring:
 #           and mention
 #             search-locations: "file///[location of config folder inside machine]"
 #            advantages:
-#             using this folder approach, we can lock this folder for security reasons, and cna be accessed by authorised personnel
+#             using this folder approach, we can lock this folder for security reasons, and cab be accessed by authorised personnel
 #        search-locations: "file///C:/config"
 #           3. using third approach using git hub repo to store our profiles
 #            change native to git saying that we're using git appraoch now
@@ -48,6 +48,7 @@ spring:
           force-pull: true
   #rabbit mq related props, giving all default values, if you don;t even mention this
   #  boot will recognize them because these are default values
+#  usign rabbit mq we can
   rabbitmq:
     host: "localhost"
     port: 5672

@@ -1,0 +1,50 @@
+Challenges using spring cloud config from remote repository and solutions:
+	-when ever a property inside a profile being changed, we have to restart the microservice so that change reflects
+	-to overcome this we can use spring boot actuator dependency and enable all the management related endpoints, like shown belo
+		management:
+		  endpoints:
+			web:
+			  exposure:
+				include: "*"
+		by doing this we're enabling endpoints like refresh, busrefresh, and many other actuator related endpoints
+	-also change dto AccountsContactInfoDto from java record to java class, so that it can have setters as well
+		whenever a property inside profile changes, this particular field inside class will be updated
+	-now when you run config server class, you can see that whenever you change a property this will reflect automatically,
+	 without needing to restart the app
+		ex: http://localhost:8071/loans/prod
+		above gives the properties of prod profile
+	-that means, instead of doing local caching, for every call it will call master copy of remote repository
+	
+	-but still when you want to see changes from microservices (accounts) this won't reflect without restarting
+		for this to happen, you need to do a refresh api call(POST), then it will give response back saying which all fields have been modified
+		ex:http://localhost:8090/actuator/refresh
+		calling refresh on loans microservice
+		this call will refresh the properties that have been updated inside props file.
+	-after doing refresh, call the props will be updated, and you can see modified changes.
+	
+	-but if you've alot of microservices, then you've to alot of refresh calls for each microservice so that they will be updated,
+	SOLUTION
+	-related dependency
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+		</dependency>
+	-also you need to install any message broker like rabbitMQ
+		download using below command if you have docker installed
+			docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.12-management
+	-we have a solution for this as well using spring cloud bus along with message broker like rabbitMQ, using this just make a single call to any microservice
+		with busrequest api provided by actuator, this will update all the related microservices that are linked to config server app
+		
+	-when you call busrefresh(API POST) call from accounts microservice, then all other microservices which are registered with rabbitMQ, will also 
+		refresh their props, by this, we will see all config props updated with only single call.
+		busrequest api: http://localhost:8090/actuator/busrefresh (for loans, but will also update config props of accounts & cards)
+	-now when you run contact-info for loans/cards, you can see updated config props.
+	
+	-you should also give below props in all props files in three microservices along with configserver app
+		  rabbitmq:
+			host: "localhost"
+			port: 5672
+			username: "guest"
+			password: "guest"
+		
+		However above are default props, if you don't give also it works, because boot already knows default values
