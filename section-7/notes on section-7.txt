@@ -1,0 +1,25 @@
+Docker commands:
+	docker run -p 3307:3306 --name accountsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=accountsdb -d mysql
+	-creating & running a docker container, with name as accountsdb, and setting environment variable(using -e) MYSQL_ROOT_PASSWORD=root
+		which creates a password for this server, MYSQL_DATABASE=accountsdb -> by using this we're creating one database by default inside the
+		cloud server with name accountsdb, -d -> detached mode, mysql -> mysql command
+		
+		-p -> port
+		3307:3306 -> 3307, is port using in local machine
+					3306 -> is port used inside container in isolated environment
+		
+	similary create containers for cards and loands usign below commands
+		docker run -p 3308:3306 --name cardsdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cardsdb -d mysql
+		docker run -p 3309:3306 --name loansdb -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=loansdb -d mysql
+		
+Connecting to these servers using SQLectron:
+	
+		SQLectron -> is a light weight gui which enables us to connect to db servers even cloud ones.
+		Inside this we can add our accounts, loans & cards servers using add feature inside the app
+		while adding you should also give necessary information like user name and password, port, hostname, etc;
+		- After adding these configurations, you can verify by clicking connect and check if the desired db is present or not
+		
+	Also remember that these docker db containers are just like your local mysql db, whenever you uninstall mysql app in your
+		machine you'll lose all your data in database
+		same happens, if you delete the db containers, you'll lose whole data so, please be very careful as we're in local
+		the access to whole data will be lost

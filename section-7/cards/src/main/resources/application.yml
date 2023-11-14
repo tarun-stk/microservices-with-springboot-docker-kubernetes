@@ -1,0 +1,53 @@
+
+server:
+  port: 9000
+spring:
+  datasource:
+#    using mysql
+    url: jdbc:mysql://localhost:3308/cardsdb
+    username: root
+    password: root
+  jpa:
+    show-sql: true
+  sql:
+    init:
+        #      saying that always try to execute code that is present inside schema.sql
+        #      when using h2 db by default spring boot will execute schema.sql for every start of the app
+        #      but when not using this we've to explicitly tell it to execute
+        #      when runs for the first time, it will create tables inside cloud docker server
+        #      when ran again instead of creating again,. it will use the same table
+        #      as we've mentioned create if not present inside schema.sql
+        #      when using h2 the db will destroyed when app is stopped, so by default always creates new tables
+        #      when using docker db this won't happen
+      mode: always
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  profiles:
+    active:
+        - "prod"
+  application:
+    name: "cards"
+#  rabbitmq:
+#    host: "localhost"
+#    port: 5672
+#    username: "guest"
+#    password: "guest"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#build:
+#  version: "3.0"
+#
+#cards:
+#  message: "Welcome to EazyBank cards related local APIs "
+#  contactDetails:
+#    name: "Dragos Lech - Developer"
+#    email: "dragos@eazybank.com"
+#  onCallSupport:
+#      - (412) 419-3491
+#      - (915) 382-1932
