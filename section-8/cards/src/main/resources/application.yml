@@ -31,6 +31,9 @@ management:
         include: "*"
   #  since this microservice instance should be deregistered with eurekaserver, when this instance
   #  gets shutdown
+#  this enables endpoint actuator/shutdown, which shuts down the app -> POST request
+#  while shutting down, it also de-registers itself from eurekaserver
+#  instead of, killing app by stopping it from intellij IDE, always choose shutdown option
   endpoint:
     shutdown:
       enabled: true

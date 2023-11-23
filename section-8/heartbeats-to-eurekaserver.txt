@@ -1,0 +1,7 @@
+Heatbeats:
+	individual microservices send regular heartbeats to eurekaserver, for every 30 seconds (default time)
+	if you want to confirm this in action
+	you can stop the eurekaserver app, by clicking stop running app in IDE
+	then if you see logs of running microservices, there you can see exceptions saying that *was unable to send hearbeats to eurekaserver*
+	this happened because eurekaserver is not running in the background.
+	This confirms that microservices send regular heartbeats to the eurekaserver.

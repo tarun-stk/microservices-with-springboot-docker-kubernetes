@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
@@ -22,6 +23,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableJpaAuditing(auditorAwareRef = "auditAwareImpl") // -> auditing related
 //Open api related documentation.  these will reflect on swagger home page
 @EnableConfigurationProperties(value = {AccountsContactInfoDto.class})
+@EnableFeignClients //-> enabling feign clients
 @OpenAPIDefinition(
 		info = @Info(
 				title = "Accounts microservice REST API Documentation",  //title of the api documentation

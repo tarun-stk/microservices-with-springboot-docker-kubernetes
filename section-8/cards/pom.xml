@@ -109,7 +109,7 @@
 				<version>3.3.2</version>
 				<configuration>
 					<to>
-						<image>tarunkumarstk/${project.artifactId}:s6</image>
+						<image>tarunkumarstk/${project.artifactId}:s8</image>
 					</to>
 				</configuration>
 			</plugin>

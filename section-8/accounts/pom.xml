@@ -81,6 +81,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
+		<!--openfeign related, allows inter communication between microservices in declerative way-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+		</dependency>
 	</dependencies>
 
 <!--	to integrate spring boot with spring cloud-->
@@ -111,7 +116,7 @@
 				<version>3.3.2</version>
 				<configuration>
 					<to>
-						<image>tarunkumarstk/${project.artifactId}:s6</image>
+						<image>tarunkumarstk/${project.artifactId}:s8</image>
 					</to>
 				</configuration>
 			</plugin>
