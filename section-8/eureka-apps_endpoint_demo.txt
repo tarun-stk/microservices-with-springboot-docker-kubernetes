@@ -1,0 +1,326 @@
+Eureka Server:
+
+	on hitting http://localhost:8070/eureka/apps  -> gives the details of all the microservice instances that are there
+	
+	output:
+			<applications>
+			<versions__delta>1</versions__delta>
+			<apps__hashcode>UP_3_</apps__hashcode>
+			<application>
+			<name>LOANS</name>
+			<instance>
+			<instanceId>host.docker.internal:loans:8090</instanceId>
+			<hostName>192.168.29.95</hostName>
+			<app>LOANS</app>
+			<ipAddr>192.168.29.95</ipAddr>
+			<status>UP</status>
+			<overriddenstatus>UNKNOWN</overriddenstatus>
+			<port enabled="true">8090</port>
+			<securePort enabled="false">443</securePort>
+			<countryId>1</countryId>
+			<dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+			<name>MyOwn</name>
+			</dataCenterInfo>
+			<leaseInfo>
+			<renewalIntervalInSecs>30</renewalIntervalInSecs>
+			<durationInSecs>90</durationInSecs>
+			<registrationTimestamp>1700634005602</registrationTimestamp>
+			<lastRenewalTimestamp>1700634485790</lastRenewalTimestamp>
+			<evictionTimestamp>0</evictionTimestamp>
+			<serviceUpTimestamp>1700634005602</serviceUpTimestamp>
+			</leaseInfo>
+			<metadata>
+			<management.port>8090</management.port>
+			</metadata>
+			<homePageUrl>http://192.168.29.95:8090/</homePageUrl>
+			<statusPageUrl>http://192.168.29.95:8090/actuator/info</statusPageUrl>
+			<healthCheckUrl>http://192.168.29.95:8090/actuator/health</healthCheckUrl>
+			<vipAddress>loans</vipAddress>
+			<secureVipAddress>loans</secureVipAddress>
+			<isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+			<lastUpdatedTimestamp>1700634005602</lastUpdatedTimestamp>
+			<lastDirtyTimestamp>1700634005517</lastDirtyTimestamp>
+			<actionType>ADDED</actionType>
+			</instance>
+			</application>
+			<application>
+			<name>ACCOUNTS</name>
+			<instance>
+			<instanceId>host.docker.internal:accounts:8080</instanceId>
+			<hostName>192.168.29.95</hostName>
+			<app>ACCOUNTS</app>
+			<ipAddr>192.168.29.95</ipAddr>
+			<status>UP</status>
+			<overriddenstatus>UNKNOWN</overriddenstatus>
+			<port enabled="true">8080</port>
+			<securePort enabled="false">443</securePort>
+			<countryId>1</countryId>
+			<dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+			<name>MyOwn</name>
+			</dataCenterInfo>
+			<leaseInfo>
+			<renewalIntervalInSecs>30</renewalIntervalInSecs>
+			<durationInSecs>90</durationInSecs>
+			<registrationTimestamp>1700633972694</registrationTimestamp>
+			<lastRenewalTimestamp>1700634482973</lastRenewalTimestamp>
+			<evictionTimestamp>0</evictionTimestamp>
+			<serviceUpTimestamp>1700633972694</serviceUpTimestamp>
+			</leaseInfo>
+			<metadata>
+			<management.port>8080</management.port>
+			</metadata>
+			<homePageUrl>http://192.168.29.95:8080/</homePageUrl>
+			<statusPageUrl>http://192.168.29.95:8080/actuator/info</statusPageUrl>
+			<healthCheckUrl>http://192.168.29.95:8080/actuator/health</healthCheckUrl>
+			<vipAddress>accounts</vipAddress>
+			<secureVipAddress>accounts</secureVipAddress>
+			<isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+			<lastUpdatedTimestamp>1700633972694</lastUpdatedTimestamp>
+			<lastDirtyTimestamp>1700633972657</lastDirtyTimestamp>
+			<actionType>ADDED</actionType>
+			</instance>
+			</application>
+			<application>
+			<name>CARDS</name>
+			<instance>
+			<instanceId>host.docker.internal:cards:9000</instanceId>
+			<hostName>192.168.29.95</hostName>
+			<app>CARDS</app>
+			<ipAddr>192.168.29.95</ipAddr>
+			<status>UP</status>
+			<overriddenstatus>UNKNOWN</overriddenstatus>
+			<port enabled="true">9000</port>
+			<securePort enabled="false">443</securePort>
+			<countryId>1</countryId>
+			<dataCenterInfo class="com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo">
+			<name>MyOwn</name>
+			</dataCenterInfo>
+			<leaseInfo>
+			<renewalIntervalInSecs>30</renewalIntervalInSecs>
+			<durationInSecs>90</durationInSecs>
+			<registrationTimestamp>1700634039030</registrationTimestamp>
+			<lastRenewalTimestamp>1700634489188</lastRenewalTimestamp>
+			<evictionTimestamp>0</evictionTimestamp>
+			<serviceUpTimestamp>1700634039030</serviceUpTimestamp>
+			</leaseInfo>
+			<metadata>
+			<management.port>9000</management.port>
+			</metadata>
+			<homePageUrl>http://192.168.29.95:9000/</homePageUrl>
+			<statusPageUrl>http://192.168.29.95:9000/actuator/info</statusPageUrl>
+			<healthCheckUrl>http://192.168.29.95:9000/actuator/health</healthCheckUrl>
+			<vipAddress>cards</vipAddress>
+			<secureVipAddress>cards</secureVipAddress>
+			<isCoordinatingDiscoveryServer>false</isCoordinatingDiscoveryServer>
+			<lastUpdatedTimestamp>1700634039030</lastUpdatedTimestamp>
+			<lastDirtyTimestamp>1700634038939</lastDirtyTimestamp>
+			<actionType>ADDED</actionType>
+			</instance>
+			</application>
+			</applications>
+	
+	you can also get the output in the form of Json, go to postman enter same url with get request, give a header
+		like Accept: application/json, this will give the output in json format
+		url: http://localhost:8070/eureka/apps
+		
+		output: 
+			{
+				"applications": {
+					"versions__delta": "1",
+					"apps__hashcode": "UP_3_",
+					"application": [
+						{
+							"name": "LOANS",
+							"instance": [
+								{
+									"instanceId": "host.docker.internal:loans:8090",
+									"hostName": "192.168.29.95",
+									"app": "LOANS",
+									"ipAddr": "192.168.29.95",
+									"status": "UP",
+									"overriddenStatus": "UNKNOWN",
+									"port": {
+										"$": 8090,
+										"@enabled": "true"
+									},
+									"securePort": {
+										"$": 443,
+										"@enabled": "false"
+									},
+									"countryId": 1,
+									"dataCenterInfo": {
+										"@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+										"name": "MyOwn"
+									},
+									"leaseInfo": {
+										"renewalIntervalInSecs": 30,
+										"durationInSecs": 90,
+										"registrationTimestamp": 1700634005602,
+										"lastRenewalTimestamp": 1700634485790,
+										"evictionTimestamp": 0,
+										"serviceUpTimestamp": 1700634005602
+									},
+									"metadata": {
+										"management.port": "8090"
+									},
+									"homePageUrl": "http://192.168.29.95:8090/",
+									"statusPageUrl": "http://192.168.29.95:8090/actuator/info",
+									"healthCheckUrl": "http://192.168.29.95:8090/actuator/health",
+									"vipAddress": "loans",
+									"secureVipAddress": "loans",
+									"isCoordinatingDiscoveryServer": "false",
+									"lastUpdatedTimestamp": "1700634005602",
+									"lastDirtyTimestamp": "1700634005517",
+									"actionType": "ADDED"
+								}
+							]
+						},
+						{
+							"name": "ACCOUNTS",
+							"instance": [
+								{
+									"instanceId": "host.docker.internal:accounts:8080",
+									"hostName": "192.168.29.95",
+									"app": "ACCOUNTS",
+									"ipAddr": "192.168.29.95",
+									"status": "UP",
+									"overriddenStatus": "UNKNOWN",
+									"port": {
+										"$": 8080,
+										"@enabled": "true"
+									},
+									"securePort": {
+										"$": 443,
+										"@enabled": "false"
+									},
+									"countryId": 1,
+									"dataCenterInfo": {
+										"@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+										"name": "MyOwn"
+									},
+									"leaseInfo": {
+										"renewalIntervalInSecs": 30,
+										"durationInSecs": 90,
+										"registrationTimestamp": 1700633972694,
+										"lastRenewalTimestamp": 1700634482973,
+										"evictionTimestamp": 0,
+										"serviceUpTimestamp": 1700633972694
+									},
+									"metadata": {
+										"management.port": "8080"
+									},
+									"homePageUrl": "http://192.168.29.95:8080/",
+									"statusPageUrl": "http://192.168.29.95:8080/actuator/info",
+									"healthCheckUrl": "http://192.168.29.95:8080/actuator/health",
+									"vipAddress": "accounts",
+									"secureVipAddress": "accounts",
+									"isCoordinatingDiscoveryServer": "false",
+									"lastUpdatedTimestamp": "1700633972694",
+									"lastDirtyTimestamp": "1700633972657",
+									"actionType": "ADDED"
+								}
+							]
+						},
+						{
+							"name": "CARDS",
+							"instance": [
+								{
+									"instanceId": "host.docker.internal:cards:9000",
+									"hostName": "192.168.29.95",
+									"app": "CARDS",
+									"ipAddr": "192.168.29.95",
+									"status": "UP",
+									"overriddenStatus": "UNKNOWN",
+									"port": {
+										"$": 9000,
+										"@enabled": "true"
+									},
+									"securePort": {
+										"$": 443,
+										"@enabled": "false"
+									},
+									"countryId": 1,
+									"dataCenterInfo": {
+										"@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+										"name": "MyOwn"
+									},
+									"leaseInfo": {
+										"renewalIntervalInSecs": 30,
+										"durationInSecs": 90,
+										"registrationTimestamp": 1700634039030,
+										"lastRenewalTimestamp": 1700634489188,
+										"evictionTimestamp": 0,
+										"serviceUpTimestamp": 1700634039030
+									},
+									"metadata": {
+										"management.port": "9000"
+									},
+									"homePageUrl": "http://192.168.29.95:9000/",
+									"statusPageUrl": "http://192.168.29.95:9000/actuator/info",
+									"healthCheckUrl": "http://192.168.29.95:9000/actuator/health",
+									"vipAddress": "cards",
+									"secureVipAddress": "cards",
+									"isCoordinatingDiscoveryServer": "false",
+									"lastUpdatedTimestamp": "1700634039030",
+									"lastDirtyTimestamp": "1700634038939",
+									"actionType": "ADDED"
+								}
+							]
+						}
+					]
+				}
+			}
+			
+	Also if you want only particular microservice details you can get them
+	just change last value to particular microservice name
+	url: http://localhost:8070/eureka/apps/accounts
+	
+	output: 
+		{
+			"application": {
+				"name": "ACCOUNTS",
+				"instance": [
+					{
+						"instanceId": "host.docker.internal:accounts:8080",
+						"hostName": "192.168.29.95",
+						"app": "ACCOUNTS",
+						"ipAddr": "192.168.29.95",
+						"status": "UP",
+						"overriddenStatus": "UNKNOWN",
+						"port": {
+							"$": 8080,
+							"@enabled": "true"
+						},
+						"securePort": {
+							"$": 443,
+							"@enabled": "false"
+						},
+						"countryId": 1,
+						"dataCenterInfo": {
+							"@class": "com.netflix.appinfo.InstanceInfo$DefaultDataCenterInfo",
+							"name": "MyOwn"
+						},
+						"leaseInfo": {
+							"renewalIntervalInSecs": 30,
+							"durationInSecs": 90,
+							"registrationTimestamp": 1700633972694,
+							"lastRenewalTimestamp": 1700634753136,
+							"evictionTimestamp": 0,
+							"serviceUpTimestamp": 1700633972694
+						},
+						"metadata": {
+							"management.port": "8080"
+						},
+						"homePageUrl": "http://192.168.29.95:8080/",
+						"statusPageUrl": "http://192.168.29.95:8080/actuator/info",
+						"healthCheckUrl": "http://192.168.29.95:8080/actuator/health",
+						"vipAddress": "accounts",
+						"secureVipAddress": "accounts",
+						"isCoordinatingDiscoveryServer": "false",
+						"lastUpdatedTimestamp": "1700633972694",
+						"lastDirtyTimestamp": "1700633972657",
+						"actionType": "ADDED"
+					}
+				]
+			}
+		}

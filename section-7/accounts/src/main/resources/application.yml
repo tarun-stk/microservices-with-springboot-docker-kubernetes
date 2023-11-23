@@ -1,71 +1,24 @@
 server:
   port: 8080
 spring:
+  application:
+    name: "accounts"
+  profiles:
+    active: "prod"
   datasource:
-    #    using mysql
-    url: jdbc:mysql://localhost:3307/accountsdb
+    url: jdbc:mysql://localhost:3306/accountsdb
     username: root
     password: root
   jpa:
     show-sql: true
   sql:
     init:
-#      saying that always try to execute code that is present inside schema.sql
-#      when using h2 db by default spring boot will execute schema.sql for every start of the app
-#      but when not using this we've to explicitly tell it to execute
-#      when runs for the first time, it will create tables inside cloud docker server
-#      when ran again instead of creating again,. it will use the same table
-#      as we've mentioned create if not present inside schema.sql
-#      when using h2 the db will destroyed when app is stopped, so by default always creates new tables
-#      when using docker db this won't happen
       mode: always
-#    giving name to the app, which should be same as the yml file inside src/main/resources/config folder
-#  so that it can match to the particular yml file
-  application:
-    name: "accounts"
-#    activating prod profile
-#  so now, inside configserver, this will activate all the properties inside "accounts-prod.yml" file
-  profiles:
-    active: "prod"
-#    importing config server instead of profiles like in previous appraoch
   config:
     import: "optional:configserver:http://localhost:8071/"
-#since we're not using below profiles, commenting out
-#  from now we will get prod and qa profile infos from configserver
-#  config:
-#    import:
-#      - "application_qa.yml"
-#      - "application_prod.yml"
-#since we don;t have qa profile, we cannot activate it, so comment out
-#  profiles:
-#    active:
-#      - "qa"
-
-#rabbit mq related props, giving all default values, if you don;t even mention this
-#  boot will recognize them because these are default values
-#removing rabbitmq to reduce load on your local system, to free up some space
-#by not running this container/image
-#  rabbitmq:
-#    host: "localhost"
-#    port: 5672
-#    username: "guest"
-#    password: "guest"
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-
-#below props are already defined in configserver, so they'll come from there
-#build:
-#  version: "3.0"
-#
-#accounts:
-#  message: "Welcome to EazyBank accounts related local APIs "
-#  contactDetails:
-#    name: "John Doe - Developer"
-#    email: "john@eazybank.com"
-#  onCallSupport:
-#    - (555) 555-1234
-#    - (555) 523-1345
