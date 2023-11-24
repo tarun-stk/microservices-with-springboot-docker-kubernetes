@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: "gatewayserver"
+  #    importing config server instead of profiles like in previous appraoch
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+#    by below we're saying to gatewar that please connect to discovery server(eureka) & locate all the microservices
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+#          service names can be allowed in lowecase now, as in eurekaserver
+          lowerCaseServiceId: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#        enabling gateway endpoint in actuator
+  endpoint:
+    gateway:
+      enabled: true
+
+  #  enabling actuator/info endpoint
+  info:
+    env:
+      enabled: true
+
+#this is the information which will displayed inside eureka dashboard
+#since there can be many microservices that register with eurekaserver, giving this information will
+#make it more clear
+#the below information will be showed using actuator/info endpoint, by default this endpoint is not enabled
+#we've to explicitly enable it
+info:
+  app:
+    name: "gatewayserver"
+    description: "Eazy Bank Gateway server Application"
+    version: "1.0.0"
+
+
+

@@ -1,0 +1,78 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#    giving name to the app, which should be same as the yml file inside src/main/resources/config folder
+#  so that it can match to the particular yml file
+  application:
+    name: "accounts"
+#    activating prod profile
+#  so now, inside configserver, this will activate all the properties inside "accounts-prod.yml" file
+  profiles:
+    active: "prod"
+#    importing config server instead of profiles like in previous appraoch
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#  since this microservice instance should be deregistered with eurekaserver, when this instance
+#  gets shutdown
+  endpoint:
+    shutdown:
+      enabled: true
+#  enabling actuator/info endpoint
+  info:
+    env:
+      enabled: true
+
+#  since this microservice instance should be deregistered with eurekaserver, when this instance
+#  gets shutdown
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+#    don't need hostname: localhost, because this is client server
+#    hostname: localhost
+#    usign below props because, usually when registering with eurekaserver we need DNS name
+#    but as we are working with local system (localhost) we should be able to register using IpAddress
+#    when other microservices are trying to connect to account ms, eurekaserver shares ipaddress with them
+#    from which communication happens
+    preferIpAddress: true
+  client:
+#    true, because we should be able to fetch registry details of other microservices when needed
+    fetchRegistry: true
+#    true, because we should register accounts ms to eurekaserver
+    registerWithEureka: true
+    serviceUrl:
+#      below url must be same as in eurekaserver.yml in config repo in github
+      defaultZone: http://localhost:8070/eureka/
+
+#this is the information which will displayed inside eureka dashboard
+#since there can be many microservices that register with eurekaserver, giving this information will
+#make it more clear
+#the below information will be showed using actuator/info endpoint, by default this endpoint is not enabled
+#we've to explicitly enable it
+info:
+  app:
+    name: "accounts"
+    description: "Eazy Bank Accounts Application"
+    version: "1.0.0"

@@ -1,0 +1,33 @@
+Notes on GateWayServer:
+	Order of running all services:
+		1. First you need to run configserver, as others are dependent on it
+		2. then you can run eurekaserver, so that microservices can register themselves at start of the app
+		3. run all microservices in any order
+		3. Run gatewayserver in the end (gateway server should always be executed at the end)
+		--> gateway server should always be executed at the end, because it takes all the microservice instances from eurekaserver.
+			& all the microservices must be ran so that they can register themselves with eurekaserver, so run gatewayserver at the end.
+			
+	How to connect to gatewayserver:
+		for more details you can visit: http://localhost:8072/actuator/gateway/routes
+			above defines all the routing url details,
+			
+		for example to create a new account through gatewayserver:
+			do a POST request thru url: http://localhost:8072/ACCOUNTS/api/accounts/
+			-same kind of prefix should be followed for other microservice requests as well, like LOANS & CARDS
+				localhost:8072 -> port where gatewayserver is running
+				ACCOUNTS -> telling gatewayserver that this is accounts microservice related request, remember that ACCOUNTS name is taken from eurekaserver
+					name as appears in eurekaserver should be taken, because gatewayserver takes microservices instances from eurekaserver only
+				this ACCOUNTS will be removed, and remaining url will be sent to particular microservice later by gateway handler
+				api/accounts/ -> request api
+				
+		Ideally by default gatewayserver accepts service names in block letters like shown above ACCOUNTS
+		to make our gatewayserver accept lowercase letters of service names we can add below props in applications.yml file of gatewayserver
+		spring:
+		  cloud:
+			gateway:
+			  discovery:
+				locator:
+				  lowerCaseServiceId: true
+				  
+				after making above changes we can modify url as
+					http://localhost:8072/accounts/api/accounts/  --> works perfectly fine
