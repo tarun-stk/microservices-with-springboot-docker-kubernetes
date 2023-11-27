@@ -76,3 +76,10 @@ info:
     name: "cards"
     description: "Eazy Bank Cards Application"
     version: "1.0.0"
+
+#defining default logging level
+logging:
+  level:
+    com:
+      eazybytes:
+        accounts: DEBUG

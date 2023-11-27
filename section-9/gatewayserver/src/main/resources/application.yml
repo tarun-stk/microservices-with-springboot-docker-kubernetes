@@ -39,5 +39,12 @@ info:
     description: "Eazy Bank Gateway server Application"
     version: "1.0.0"
 
+#defining default logging level
+logging:
+  level:
+    com:
+      eazybytes:
+        gatewayserver: DEBUG
+
 
 
