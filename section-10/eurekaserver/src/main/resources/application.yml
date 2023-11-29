@@ -1,0 +1,26 @@
+#config server details
+spring:
+  application:
+    name: "eurekaserver"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+#exposing all endpoints, because we should make sure that this eurekaserver app starts before all other microservices, as they're dependent
+#on this eurekaserver
+#so we must make sure this app is healthy before starting to make calls to this from microservices
+#we define this prop in Dockerfile, saying that all other microservices are dependent on this erurekaserver, so start and do healthcheck of this app
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  #        props regarding liveness and readiness of the app
+  health:
+    readiness-state:
+      enabled: true
+    liveness-state:
+      enabled: true
+    endpoint:
+      health:
+        probes:
+          enabled: true

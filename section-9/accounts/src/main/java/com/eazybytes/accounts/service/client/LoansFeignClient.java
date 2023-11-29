@@ -5,6 +5,7 @@ import com.eazybytes.accounts.dto.LoansDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 //@FeignClient("microservice_name_as_on_eurekaserver") -> inside parenthesis, the name should match as on eurekaserver
@@ -24,5 +25,5 @@ public interface LoansFeignClient {
 //    also use the same HttpMEthod with same endpoints as in LoansController
 //    this method fetches corresponding card details based on mobileNumber of the customer
     @GetMapping(value = "/api/loans/", consumes = "application/json")
-    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestParam String mobileNumber);
+    public ResponseEntity<LoansDto> fetchLoanDetails(@RequestHeader("eazybank-correlation-id") String correlationId, @RequestParam String mobileNumber);
 }
