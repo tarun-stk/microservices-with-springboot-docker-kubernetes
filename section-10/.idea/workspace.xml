@@ -5,51 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac030a64-7baa-4d28-a2ba-b3c0aee3020f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../section-9/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-9/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/.mvn/wrapper/maven-wrapper.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/AccountsApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/audit/AuditAwareImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/constants/AccountsConstants.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/controller/AccountsController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/controller/CustomerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/AccountsContactInfoDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/AccountsDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/CardsDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/CustomerDetailsDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/CustomerDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/ErrorResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/LoansDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/dto/ResponseDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/entity/Accounts.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/entity/BaseEntity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/entity/Customer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/exception/CustomerAlreadyExistsException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/exception/GlobalExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/exception/ResourceNotFoundException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/mapper/AccountsMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/mapper/CustomerMapper.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/repository/AccountsRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/repository/CustomerRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/service/IAccountsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/service/ICustomerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/service/client/CardsFeignClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/service/client/LoansFeignClient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/service/impl/AccountsServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/java/com/eazybytes/accounts/service/impl/CustomerServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/main/resources/schema.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/accounts/src/test/java/com/eazybytes/accounts/AccountsApplicationTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/cards/src/main/java/com/eazybytes/cards/controller/CardsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../section-9/cards/src/main/java/com/eazybytes/cards/controller/CardsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/cards/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-9/cards/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/gatewayserver/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-9/gatewayserver/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/gatewayserver_notes.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../section-9/loans/src/main/java/com/eazybytes/loans/controller/LoansController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../section-9/loans/src/main/java/com/eazybytes/loans/controller/LoansController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/GatewayserverApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/GatewayserverApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatewayserver_notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver_notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/controller/LoansController.java" beforeDir="false" afterPath="$PROJECT_DIR$/loans/src/main/java/com/eazybytes/loans/controller/LoansController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,15 +37,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Enfec Solutions/Documents/Master Microservices with SpringBoot, Docker & Kubernetes/section-10",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Enfec Solutions/Documents/Master Microservices with SpringBoot, Docker &amp; Kubernetes/section-10&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.eazybytes.accounts.service.client" />
@@ -177,5 +137,16 @@
       <updated>1701085456448</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/accounts/src/main/java/com/eazybytes/accounts/controller/AccountsController.java</url>
+          <line>267</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

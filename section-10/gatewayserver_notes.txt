@@ -31,3 +31,52 @@ Notes on GateWayServer:
 				  
 				after making above changes we can modify url as
 					http://localhost:8072/accounts/api/accounts/  --> works perfectly fine
+					
+					
+	Http timeout configurations:
+		-if a particular api call being invoked using gatewayserver(http://localhost:8072/eazybank/accounts/api/accounts/contact-info), 
+			and if the microservice takes longer than usual time to respond then client has to wait until the response is being given
+		-so to avoid these kind of situations we can define global timeouts in our gatewayserver app.
+		-u can refer following link to get more info https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#http-timeouts-configuration
+		-following are the props	
+			spring:
+			  cloud:
+				gateway:
+				  httpclient:
+					connect-timeout: 1000
+					response-timeout: 5s
+
+		-when you add these information in app.yml file, then for any microservice being invoked using gatewayserver and if it takes more time than defined in 
+			yml file, then a gateway timeout response will be given to the client, instead of client waiting for lot of time, time saving.
+			sample response:
+				{
+					"timestamp": "2023-11-30T06:33:15.797+00:00",
+					"path": "/eazybank/loans/api/loans/contact-info",
+					"status": 504,
+					"error": "Gateway Timeout",
+					"message": "Response took longer than timeout: PT2S",
+					"requestId": "caad8600-6",
+					"trace": "org.springframework.cloud.gateway.support.TimeoutException: Response took longer than timeout: PT2S\r\n"
+				}
+		-if you've circuit breaker defined for any of the microservice, then this global timeout will not work if that particular microservice fails to send/establish connection
+			to gatewayserver, because circuit breaker has more precedence compared to global timeout
+			that's why on calling http://localhost:8072/eazybank/accounts/api/accounts/contact-info
+			gives custom circuit breaker response
+			
+			
+	Retry pattern:
+		-it is one of the microservice resilient patterns, in this we try to do some retries on calling the same api, when there is a timout or exception
+			happens, we define number of retries, for how many seconds each retry should happen
+		-code like shown below
+								.retry(retryConfig -> retryConfig.setRetries(3)
+//										setting retries only to GET requests
+//										only set retries to idempotent requests(requests that always send same response)
+//										if you set retries to like POST/PUt, then if we retry multiple times then the data might get corrupted/duplicated
+//										so care should be taken while doing setMethods to retry
+										.setMethods(HttpMethod.GET)
+//										setting backOff, if we retry multiple times, with some factor like 2, by coming to end of retries
+//										there will be large amount of time to wait between two retries, so instead of waiting for that much of time
+//										we can define some limit within which a retry will happen
+										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
+			
+			

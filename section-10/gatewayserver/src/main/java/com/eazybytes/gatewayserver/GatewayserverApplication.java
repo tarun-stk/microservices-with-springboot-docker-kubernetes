@@ -5,7 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
@@ -55,7 +57,20 @@ public class GatewayserverApplication {
 				.route(p -> p
 						.path("/eazybank/loans/**")
 						.filters(f -> f.rewritePath("/eazybank/loans/(?<segment>.*)", "/${segment}")
-								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString()))
+								.addResponseHeader("X-Response-Time", LocalDateTime.now().toString())
+//								setting retry to loans microservice, if loans microservice doesn't respond well, then it will retry the same
+//								request for some number of times, with some timeperiod between each retry as mentioned below
+//								/setting 3 as number of total retries
+								.retry(retryConfig -> retryConfig.setRetries(3)
+//										setting retries only to GET requests
+//										only set retries to idempotent requests(requests that always send same response)
+//										if you set retries to like POST/PUt, then if we retry multiple times then the data might get corrupted/duplicated
+//										so care should be taken while doing setMethods to retry
+										.setMethods(HttpMethod.GET)
+//										setting backOff, if we retry multiple times, with some factor like 2, by coming to end of retries
+//										there will be large amount of time to wait between two retries, so instead of waiting for that much of time
+//										we can define some limit within which a retry will happen
+										.setBackoff(Duration.ofMillis(100), Duration.ofMillis(1000), 2, true)))
 						.uri("lb://LOANS"))
 				.route(p -> p
 						.path("/eazybank/cards/**")

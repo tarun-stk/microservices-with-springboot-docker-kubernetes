@@ -253,6 +253,9 @@ public class LoansController {
     )
     @GetMapping("/contact-info")
     public ResponseEntity<LoansContactInfoDto> getContactInfo() {
+        log.debug("Inside getContactInfo() in LoansController");
+//        also when you throw an exception the retry will happen from gatewayserver app
+//        throw new RuntimeException("Testing retries");
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(loansContactInfoDto);

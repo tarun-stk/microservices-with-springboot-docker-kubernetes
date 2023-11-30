@@ -12,6 +12,15 @@ spring:
           enabled: false
 #          service names can be allowed in lowecase now, as in eurekaserver
           lowerCaseServiceId: true
+#          global timeout configs, if any microservice api request takes more time than defined below
+#      then default gateway timeout response will be thrown to client
+      httpclient:
+#        below defines time limit(1s) to establish connection between particular microservice and gatewayserver
+#        if connection not established in this time, then throw gateway timeout
+        connect-timeout: 1000
+#        below defines time limit(2s) to get a response from microservice, if response not received within 2s
+#        to gatewayserver then throw gateway timeout
+        response-timeout: 2s
 
 management:
   endpoints:
