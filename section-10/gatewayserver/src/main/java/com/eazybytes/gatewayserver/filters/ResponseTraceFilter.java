@@ -30,8 +30,14 @@ public class ResponseTraceFilter {
             return chain.filter(exchange).then(Mono.fromRunnable(() -> {
                 HttpHeaders requestHeaders = exchange.getRequest().getHeaders();
                 String correlationId = filterUtility.getCorrelationId(requestHeaders);
-                logger.debug("Updated the correlation id to the outbound headers: {}", correlationId);
-                exchange.getResponse().getHeaders().add(filterUtility.CORRELATION_ID, correlationId);
+//                adding below code to make sure that we're seding response header (CORRELATION_ID)  only once, for multiple requests
+//                during retry pattern invocation this was sending headers for each retry execution
+//                so added this statement, which will make sure that only once, the header will be added
+                if(!(exchange.getRequest().getHeaders().containsKey(filterUtility.CORRELATION_ID))){
+                    logger.debug("Updated the correlation id to the outbound headers: {}", correlationId);
+                    exchange.getResponse().getHeaders().add(filterUtility.CORRELATION_ID, correlationId);
+                }
+
             }));
         };
     }

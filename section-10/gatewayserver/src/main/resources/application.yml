@@ -21,6 +21,12 @@ spring:
 #        below defines time limit(2s) to get a response from microservice, if response not received within 2s
 #        to gatewayserver then throw gateway timeout
         response-timeout: 2s
+  data:
+    redis:
+      connect-timeout: 2s
+      host: localhost
+      port: 6379
+      timeout: 1s
 
 management:
   endpoints:

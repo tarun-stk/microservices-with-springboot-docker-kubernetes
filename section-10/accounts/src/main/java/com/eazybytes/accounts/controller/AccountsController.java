@@ -7,6 +7,8 @@ import com.eazybytes.accounts.dto.CustomerDto;
 import com.eazybytes.accounts.dto.ErrorResponseDto;
 import com.eazybytes.accounts.dto.ResponseDto;
 import com.eazybytes.accounts.service.IAccountsService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,6 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -24,6 +27,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.concurrent.TimeoutException;
+
 @Tag(  // open api related anno
         name = "CRUD REST APIs for Accounts in EazyBank",
         description = "CRUD REST APIs in EazyBank to CREATE, UPDATE, FETCH AND DELETE account details"
@@ -32,6 +38,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @NoArgsConstructor
 @RequestMapping(value = "/api/accounts", produces = {MediaType.APPLICATION_JSON_VALUE})
+@Slf4j
 public class AccountsController {
 
     private IAccountsService accountsService;
@@ -208,11 +215,32 @@ public class AccountsController {
             )
     }
     )
+//    working with retry pattern from resiliency in accounts microservice
+//    you can work with retry pattern in both ways like through gatewarserver as well as thru microservice itself
+//    in this demo we're trying with microservice retyr
+//    for this we need to annotate @Retry on top of method
+//    inside params of anno, give name and also define which method you want to execute on fallback
+//    you can set retry limit in app.yml file, if in all the retries this method fails to send response
+//    then fallback method will execute and send some default response.
+//    for fallback method, the method signature must be same as of this method like modifier, return type, when coming to params
+//    fallback should have should have same params, along wiht that one additional param known as Throwable
+//    like shown in getBuildInfoFallback(Throwable throwable)
+    @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
     @GetMapping("/build-info")
-    public ResponseEntity<String> getBuildInfo(){
+    public ResponseEntity<String> getBuildInfo() throws TimeoutException {
+        log.debug("Inside getBuildInfo()");
+//        throw new RuntimeException();
+        throw new TimeoutException();
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(buildVersion);
+    }
+
+    public ResponseEntity<String> getBuildInfoFallback(Throwable throwable){
+        log.debug("Inside getBuildInfoFallback() -> fallback executed");
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(buildVersion);
+                .body("0.9");
     }
 
     @Operation(
@@ -234,6 +262,7 @@ public class AccountsController {
     }
     )
     @GetMapping("/java-version")
+    @RateLimiter(name= "getJavaVersion", fallbackMethod = "getJavaVersionFallback")
     public ResponseEntity<String> getJavaVersion() {
         return ResponseEntity
                 .status(HttpStatus.OK)
@@ -244,6 +273,13 @@ public class AccountsController {
 //                VALUE example is C:\Program Files\Java\jdk-17
                 .body(environment.getProperty("JAVA_HOME"));
     }
+
+    public ResponseEntity<String> getJavaVersionFallback(Throwable throwable) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Java 17");
+    }
+
 
     @Operation(
             summary = "Get Java version",
