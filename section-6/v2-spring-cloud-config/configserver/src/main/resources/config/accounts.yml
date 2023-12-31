@@ -1,7 +1,7 @@
 #as we're now activating profiles using spring cloud
 #comment below code which is activating this profile using spring boot
 #below properties we don't have to send to spring cloud
-
+#our main motto is to send only externalizable props, so common props like server port and h2 db not required
 #server:
 #  port: 8080
 #spring:

@@ -1,8 +1,14 @@
+#The purpose of this file is to seperate out common properties in each service into one thing
+#so that if in future you wish to change, you can only change in one place
+
+#defining services
 services:
-  network-deploy-service:
+#  all network related props
+  network-deploy-service:  # service name
     networks:
       - eazybank
 
+#deployment related props
   microservice-base-config:
     extends:
       service: network-deploy-service
@@ -13,9 +19,10 @@ services:
     environment:
       SPRING_RABBITMQ_HOST: "rabbit"
 
+#all common configserver related props grouped into this below service
   microservice-configserver-config:
-    extends:
-      service: microservice-base-config
+    extends: # extending other services in the same file
+      service: microservice-base-config # extending this service so that it will get all props from that service as well
     depends_on:
       configserver:
         condition: service_healthy

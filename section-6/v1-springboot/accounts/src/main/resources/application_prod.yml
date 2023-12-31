@@ -1,6 +1,6 @@
 #prod profile, needed to activated
 
-#activating this properties.yml file, when qa is selected, qa profile is activated
+#activating this properties.yml file, when prod is selected, prod profile is activated
 spring:
   config:
     activate:

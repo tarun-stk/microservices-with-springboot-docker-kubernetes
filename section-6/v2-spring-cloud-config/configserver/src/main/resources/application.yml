@@ -20,7 +20,7 @@ spring:
 #        native:
 #          1.using spring cloud first approach
 #          storing config server in our classpath
-#          disadvantages:
+#          disadvantages-
 #           who has access to our config app can see what's there inside this
 #          search-locations: "classpath:/config"
 #          2.using second approach, using file system
@@ -63,11 +63,18 @@ management:
       exposure:
         include: "*"
 #        props regarding liveness and readiness of the app
+#  enabling thesse endpoints so that will be helpful while running thru containers
+#  actually accounts, cards & loans microservices are dependent on these service
+#  so we must make sure that both live-ness and readiness of this service are up
+#  Liveness: the app started but not sure if it is ready to accept requests, may be in background it is getting ready
+#  Readiness: app started and ready to take requests
+#  once these two things are ready we make sure that other ms containers start
   health:
     readiness-state:
       enabled: true
     liveness-state:
       enabled: true
+#      enabling both the endpoints
     endpoint:
       health:
         probes:
@@ -85,6 +92,7 @@ management:
 #[servicename] -> accounts, loans, cards
 #  [profilename] -> default, qa, prod
 #and gives all qa related information
+#for all the profiles default loads by default, so you will see it in all profile details
 
 #gives output as follows
 #  {

@@ -23,7 +23,12 @@ spring:
   profiles:
     active: "prod"
 #    importing config server instead of profiles like in previous appraoch
+
   config:
+#    here configserver means not the app name that we've, irrespective of the configserver app name
+#    you must give configserver only in below url
+#    by mentioning optional we're saying that if this microservice is not able to connect to configserver
+#    at the start of the app, then also start the microservice normally
     import: "optional:configserver:http://localhost:8071/"
 #since we're not using below profiles, commenting out
 #  from now we will get prod and qa profile infos from configserver

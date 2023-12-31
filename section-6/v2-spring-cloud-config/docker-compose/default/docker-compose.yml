@@ -19,8 +19,11 @@ services:  # name the names of services
       timeout: 5s
       retries: 10
       start_period: 5s
+#      extending props defined in common-config.yml file
     extends:
+#      file name
       file: common-config.yml
+#      service name
       service: network-deploy-service
 
   configserver: #Microservice name
@@ -30,14 +33,26 @@ services:  # name the names of services
     # want to explicity mention a name then yu can use this, if u like this then the container name will be generated as same
     ports: # list of ports that you can give here
       - "8071:8071"
+#      saying that this service is internally dependent on rabbit service
+#    only then rabbit server is in state service_healthy (means ready and also ready to accept requests)
+#    both liveness and readiness
+#    after that only docker will start the configserver
     depends_on:
       rabbit:
         condition: service_healthy
+#        following is the curl command which checks for the readiness of the configserver app
+#    also mention some other things like interval, retries so that if failed it will retry for'
+#    every some amount of time
     healthcheck:
+#      grep UP -> the status should be UP
+#      if not UP simply exit
       test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+#      for every 10s
       interval: 10s
       timeout: 5s
+#      setting no of retries
       retries: 10
+#      start checking readiness only after 10s from starting the service
       start_period: 10s
     extends:
       file: common-config.yml

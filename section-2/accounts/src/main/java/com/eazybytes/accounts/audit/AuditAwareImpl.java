@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 import java.util.Optional;
 
 @Component("auditAwareImpl")
-public class AuditAwareImpl implements AuditorAware<String> {
+public class AuditAwareImpl implements AuditorAware<String> {  //since createdBy & UpdatedBy are strings
+//    we're using AuditorAware<String> in class definition
 
 
     /**
@@ -14,6 +15,8 @@ public class AuditAwareImpl implements AuditorAware<String> {
      *
      * @return the current auditor.
      */
+//    currently returning hard coded value
+//    will be implemented when working with spring security
     @Override
     public Optional<String> getCurrentAuditor() {
         return Optional.of("ACCOUNTS_MS");

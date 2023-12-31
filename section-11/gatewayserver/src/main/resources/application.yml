@@ -42,6 +42,11 @@ management:
   info:
     env:
       enabled: true
+  #    telling micrometer & prometheus to do all metrics related to this microservice
+  #  in ${spring.application.name} app
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 #this is the information which will displayed inside eureka dashboard
 #since there can be many microservices that register with eurekaserver, giving this information will

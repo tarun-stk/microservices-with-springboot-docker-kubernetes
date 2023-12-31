@@ -38,6 +38,8 @@ import java.time.LocalDateTime;
 // In the database, this will correspond to one MyEmployee table with three columns for the declared and inherited fields of the subclass.
 // If we’re using this strategy, ancestors cannot contain associations with other entities.
 
+//In simple terms, mappedSuperClass fields won't be persisted into db by themselves, but will be persisetd by the extending class
+
 @Getter @Setter @ToString
 @EntityListeners(AuditingEntityListener.class) // -> auditing related
 public class BaseEntity {

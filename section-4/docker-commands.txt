@@ -7,6 +7,9 @@ DOCKER commands:
 	- this is the standard way of creating docker images, always follow username/microservicename:tagname  -> this pattern
 	- username is nothing but your docker username
 	
+	mvn compile jib:dockerBuild
+	-builds docker image based on google jib config, run this from pom.xml location
+	
 	docker ps
 	- lists down all running containers
 	

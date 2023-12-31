@@ -1,3 +1,7 @@
+#By using different common-config files for each env, we can easily control theire behaviour
+#like setting env specific props
+#if you want to have prod env more space then you can do it here.
+
 services:
   network-deploy-service:
     networks:
@@ -20,5 +24,6 @@ services:
       configserver:
         condition: service_healthy
     environment:
+#      all the common-config files are same except below line, where we set env using environment variables
       SPRING_PROFILES_ACTIVE: prod
       SPRING_CONFIG_IMPORT: configserver:http://configserver:8071/
