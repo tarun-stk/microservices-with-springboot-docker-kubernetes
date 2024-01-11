@@ -10,6 +10,9 @@ DOCKER commands:
 	mvn compile jib:dockerBuild
 	-builds docker image based on google jib config, run this from pom.xml location
 	
+	to resolve that google jib issue while generating docker image:
+		go to user/.docker/config.json and remove prod credStore
+	
 	docker ps
 	- lists down all running containers
 	
@@ -56,4 +59,13 @@ DOCKER commands:
 	
 	docker compose start
 	- this will start running the containers, but you've to make sure that containers are there(not deleted)
+	
+	docker rm <container_id>
+	- deletes container with given id
+	
+	docker rmi myimage:latest
+	- deletes image with image name
+	
+	docker rmi IMAGE_ID
+	- deletes image with given id
 	
