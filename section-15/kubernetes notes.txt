@@ -1,0 +1,8 @@
+Kubernetes Notes:
+	-First enable kubernetes on docker desktop
+		https://docs.docker.com/desktop/kubernetes/
+		
+	-Then run couple of kubectl commands mentioned in above url to make sure that it is installed correctly
+	
+	-then deploy kubernetes cluster 
+		https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/

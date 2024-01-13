@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ac030a64-7baa-4d28-a2ba-b3c0aee3020f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/RequestTraceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/RequestTraceFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/ResponseTraceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/ResponseTraceFilter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +33,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Enfec Solutions/Documents/Master Microservices with SpringBoot, Docker & Kubernetes/section-4",
+    "last_opened_file_path": "C:/Users/Enfec Solutions/Documents/Master Microservices with SpringBoot, Docker & Kubernetes/section-10",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
@@ -103,11 +105,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.EurekaserverApplication" />
         <item itemvalue="Application.GatewayserverApplication" />
+        <item itemvalue="Application.AccountsApplication" />
         <item itemvalue="Application.LoansApplication" />
         <item itemvalue="Application.CardsApplication" />
-        <item itemvalue="Application.AccountsApplication" />
-        <item itemvalue="Application.EurekaserverApplication" />
       </list>
     </recent_temporary>
   </component>

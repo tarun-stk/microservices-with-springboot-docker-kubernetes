@@ -42,6 +42,11 @@ public class RequestTraceFilter implements GlobalFilter {
             exchange = filterUtility.setCorrelationId(exchange, correlationID);
             logger.debug("eazyBank-correlation-id generated in RequestTraceFilter : {}", correlationID);
         }
+        /*
+         * doing below because after applying our custom filter, gateqwqy server has it's own predefined
+         * filter which it has to execute, if custom filters were not implemented, then this would happen automatically
+         * but when custom filters are in palce, we've to manually call predefined filters after completing our custom filter logic
+         */
         return chain.filter(exchange);
     }
 

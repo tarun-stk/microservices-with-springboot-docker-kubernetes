@@ -24,6 +24,9 @@ public class ResponseTraceFilter {
     @Autowired
     FilterUtility filterUtility;
 
+    /*
+    * Using GlobalFilter as a bean, instead of implementing it -> this is an other way of doing
+    * this method actually sends the correlationId in httpheaders to the client */
     @Bean
     public GlobalFilter postGlobalFilter() {
         return (exchange, chain) -> {
