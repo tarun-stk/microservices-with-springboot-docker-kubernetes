@@ -1,0 +1,55 @@
+#first two lines are always static, saying the version & of kind (like Service/Deployment)
+#kind in kubernetes is a predefined object, so giving other things which are not objects will throw errors
+apiVersion: apps/v1
+kind: Deployment
+#meta-data
+metadata:
+  name: configserver-deployment
+  labels:
+#Defining the name for our app, using which other microservices can communicate with this service using the name
+#inside cluster communcation internally happens thru service names
+    app: configserver
+spec:
+# defining number of replicas, if 2 then 2 instances will be created
+  replicas: 1
+  selector:
+    matchLabels:
+    #setting this properties for configserver using it's name, so use the correct name across all the places
+      app: configserver
+      #setting the template props to our configserver
+  template:
+    metadata:
+      labels:
+        app: configserver
+    spec:
+      containers:
+      #giving name to our container
+      - name: configserver
+      #giving image details of our container
+        image: eazybytes/configserver:s12
+        ports:
+        #app will run on port 8071 inside container
+        - containerPort: 8071
+#--- three lines in yaml file means we're separating single file into multiple files using ---
+#this will help us run only single file but internally it will run many
+#reduces manual effort
+---
+#service related details
+apiVersion: v1
+kind: Service
+metadata:
+  name: configserver
+spec:
+  selector:
+    app: configserver
+#whenever type is loadbalancer, it means this will expose this particular service (configserver) to outside world so that 
+#they can communicate with this srvice
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+    #port of the local system
+    #always give same port to both port and targetPort, if not given kubernets will thro error
+      port: 8071
+      #port of the internal container
+      targetPort: 8071
+      
