@@ -1,0 +1,38 @@
+kubectl commands
+
+	kubectl scale deployment <deployment_name> --replicas=1
+	eg: kubectl scale deployment accounts-deployment --replicas=1
+	-changing replica count for accounts-deployment
+	
+	kubectl get replicaset
+	-gives the replica count of all the deployments
+	
+	kubectl get pods
+	-gives the list of all pods in the cluster
+	
+	kubectl apply -f <filename>
+	-to apply the given manifest file 
+	
+	kubectl describe pod <podname>
+	-gives the detailed info of the mentioned pod name, like image name etc.,
+	
+	kubectl delete pod podname	
+	-deletes the pod mentioned, if you've multiple replicas for the given deployment for this pod, then kubernetes
+		will always try to match desired and actual count of the pods, so even if you delete, kubernetes will automatically
+		create a new one only if the count doesn't match.
+	
+	kubectl set image deployment gatewayserver-deployment gatewayserver=tarunkumarstk/gatewayserver:s11 --record
+	-changing the image of the deployment using kubectl command, behind the scenes it will create a new pod, and until
+			or unless this new pod starts running successfully the old pod will not be terminated
+			it you've multiple replicas, similarly kubernetes will replace old replicas with new ones in incremental fashion
+	
+	kubectl get events
+	-list the list of events that have happened, like creating a pod, killing a pod
+	
+	kubectl rollout history deployment gatewayserver-deployment
+	-gives the list of rollout history for mentioned deployment above given applies to gatewayserver-deployment
+	
+	kubectl rollout undo deployment gatewayserver-deployment --to-revision=1
+	-rolling back to previous version of gatewayserver-deployment which is at serial number 1.
+	-this is useful when there is problem with current rolled out version, so that you can immediately rollback to one of 
+		the previous working version

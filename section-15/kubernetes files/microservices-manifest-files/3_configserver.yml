@@ -26,6 +26,8 @@ spec:
       #giving name to our container
       - name: configserver
       #giving image details of our container
+      #by default if you do not mention repo name, it kubernetes will assume docker.io
+      #eazybytes/configserver:s12 means docker.io/eazybytes/configserver:s12
         image: eazybytes/configserver:s12
         ports:
         #app will run on port 8071 inside container
@@ -44,12 +46,14 @@ spec:
     app: configserver
 #whenever type is loadbalancer, it means this will expose this particular service (configserver) to outside world so that 
 #they can communicate with this srvice
+#outside means, outside of the cluster as well, so that client apps can communicate with this.
   type: LoadBalancer
   ports:
     - protocol: TCP
     #port of the local system
-    #always give same port to both port and targetPort, if not given kubernets will thro error
+    #always give same port to both port and targetPort, to avoid confusion
       port: 8071
       #port of the internal container
+      #Always make sure targetPort and containerPort will be same
       targetPort: 8071
       
