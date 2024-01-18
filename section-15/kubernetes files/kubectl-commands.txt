@@ -10,6 +10,12 @@ kubectl commands
 	kubectl get pods
 	-gives the list of all pods in the cluster
 	
+	kubectl get deployements
+	-list of all deployements
+	
+	kubectl delete deployments <deployment_name>
+	-deletes the particular deployment
+	
 	kubectl apply -f <filename>
 	-to apply the given manifest file 
 	

@@ -49,6 +49,7 @@ management:
     env:
       enabled: true
 #    telling micrometer & prometheus to do all metrics related to this microservice
+  #otherwise saying to group all metrix related data by microservice name
 #  in ${spring.application.name} app
   metrics:
     tags:

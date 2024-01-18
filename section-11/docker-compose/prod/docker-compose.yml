@@ -1,4 +1,14 @@
 services:
+  # below mentioned services are related to Observability->logging & monitoring
+  #read, write, gateway, promtail, minio, grafana, prometheus
+  # for logging: read, write, promtail, minio, grafana
+  # for logging part we're not doing any changes in microservices code, we're just adding services in docker-compose file.
+  # for monitoring: grafana, prometheus
+  #for monitoring part, we don't have much changes in microservices code but few chagnes in pom.xml and application.yml files
+  #in pom add micrometer & prometheus related dependency
+  #in app.yml file add a configuration like shown below, it groups all metrix related data by microservice names
+#  metrics.tag.application=${spring.application.name}
+
   read:
     image: grafana/loki:2.8.3
     command: "-config.file=/etc/loki/config.yaml -target=read"
@@ -6,6 +16,9 @@ services:
       - 3101:3100
       - 7946
       - 9095
+      # volumes:
+      #file location: destination file location (inside container)
+      # we are saying to copy file from file location to destination at destinatoin file location path(this wil be inside container)
     volumes:
       - ../observability/loki/loki-config.yaml:/etc/loki/config.yaml
     depends_on:
@@ -15,6 +28,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      #This is variable creation inside yml &loki-dns (loki-dns is the variable name) and & is way of telling it is variable
     networks: &loki-dns
       eazybank:
         aliases:
@@ -37,6 +51,7 @@ services:
     depends_on:
       - minio
     networks:
+      # accessing the value inside local variable loki-dns which equals eazybank.aliases=loki
       <<: *loki-dns
 
   promtail:

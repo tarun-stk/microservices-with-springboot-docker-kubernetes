@@ -1,0 +1,14 @@
+HELM COMMANDS	
+
+	helm ls
+	-it will show all the workloads running inside kubernetes cluster, which were run with help of helm
+	
+	helm uninstall <chartname>
+	-to delete helm chart, it will also delete all the details inside kubernetes cluster
+	
+	helm create <charname>
+	-to create a helm chart
+	
+	helm dependencies build
+	-run from helm chart location, it will compile the current helm chart and also dependent helm chart
+		and will generate all the related helm charts inside charts folder
