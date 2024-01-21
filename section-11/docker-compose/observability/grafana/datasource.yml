@@ -1,14 +1,17 @@
 apiVersion: 1
 
+#delete if already exists
 deleteDatasources:
   - name: Prometheus
   - name: Loki
-  - name: Tempo
+#  - name: Tempo
 
 datasources:
+  - # list of all datasources & their details
   - name: Prometheus
     type: prometheus
     uid: prometheus
+    # url: servicename:portNumber
     url: http://prometheus:9090
     access: proxy
     orgId: 1
@@ -18,20 +21,20 @@ datasources:
     editable: true
     jsonData:
       httpMethod: GET
-  - name: Tempo
-    type: tempo
-    uid: tempo
-    url: http://tempo:3100
-    access: proxy
-    orgId: 1
-    basicAuth: false
-    isDefault: false
-    version: 1
-    editable: true
-    jsonData:
-      httpMethod: GET
-      serviceMap:
-        datasourceUid: 'prometheus'
+#  - name: Tempo
+#    type: tempo
+#    uid: tempo
+#    url: http://tempo:3100
+#    access: proxy
+#    orgId: 1
+#    basicAuth: false
+#    isDefault: false
+#    version: 1
+#    editable: true
+#    jsonData:
+#      httpMethod: GET
+#      serviceMap:
+#        datasourceUid: 'prometheus'
   - name: Loki
     type: loki
     uid: loki

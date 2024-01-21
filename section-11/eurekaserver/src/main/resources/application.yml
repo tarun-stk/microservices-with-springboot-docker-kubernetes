@@ -15,15 +15,16 @@ management:
       exposure:
         include: "*"
   #        props regarding liveness and readiness of the app
-  health:
-    readiness-state:
+  readiness-state:
+    enabled: true
+  liveness-state:
+    enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+    shutdown:
       enabled: true
-    liveness-state:
-      enabled: true
-    endpoint:
-      health:
-        probes:
-          enabled: true
   #    telling micrometer & prometheus to do all metrics related to this microservice
   #  in ${spring.application.name} app
   metrics:

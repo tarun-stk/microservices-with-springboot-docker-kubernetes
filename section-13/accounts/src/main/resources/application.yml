@@ -1,0 +1,148 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#    giving name to the app, which should be same as the yml file inside src/main/resources/config folder
+#  so that it can match to the particular yml file
+  application:
+    name: "accounts"
+#    activating prod profile
+#  so now, inside configserver, this will activate all the properties inside "accounts-prod.yml" file
+  profiles:
+    active: "prod"
+#    importing config server instead of profiles like in previous appraoch
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+#    circuit breaker related props
+  cloud:
+    openfeign:
+      circuitbreaker:
+#        enabling circuit breakers for openfeign clients
+#        if any of the openfeign client fails to receive response, then it will go into fallback
+        enabled: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#  since this microservice instance should be deregistered with eurekaserver, when this instance
+#  gets shutdown
+  endpoint:
+    shutdown:
+      enabled: true
+#  enabling actuator/info endpoint
+  info:
+    env:
+      enabled: true
+#    telling micrometer & prometheus to do all metrics related to this microservice
+#  in ${spring.application.name} app
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+#  since this microservice instance should be deregistered with eurekaserver, when this instance
+#  gets shutdown
+endpoints:
+  shutdown:
+    enabled: true
+
+eureka:
+  instance:
+#    don't need hostname: localhost, because this is client server
+#    hostname: localhost
+#    usign below props because, usually when registering with eurekaserver we need DNS name
+#    but as we are working with local system (localhost) we should be able to register using IpAddress
+#    when other microservices are trying to connect to account ms, eurekaserver shares ipaddress with them
+#    from which communication happens
+    preferIpAddress: true
+  client:
+#    true, because we should be able to fetch registry details of other microservices when needed
+    fetchRegistry: true
+#    true, because we should register accounts ms to eurekaserver
+    registerWithEureka: true
+    serviceUrl:
+#      below url must be same as in eurekaserver.yml in config repo in github
+      defaultZone: http://localhost:8070/eureka/
+
+#this is the information which will displayed inside eureka dashboard
+#since there can be many microservices that register with eurekaserver, giving this information will
+#make it more clear
+#the below information will be showed using actuator/info endpoint, by default this endpoint is not enabled
+#we've to explicitly enable it
+info:
+  app:
+    name: "accounts"
+    description: "Eazy Bank Accounts Application"
+    version: "1.0.0"
+
+#defining default logging level
+logging:
+  level:
+    com:
+      eazybytes:
+        accounts: DEBUG
+#circuit breaker related props
+resilience4j.circuitbreaker:
+  configs:
+    #    setting default this means this props will be set for all circuit breakers in the app
+    #    if you want to define props dfferently for each circuitbreaker then use circuit breaker names instead of using default
+    #    circuit breaker names are defined in main class like for ex: accountsCircuitBreaker
+    default:
+      #      setting to allow 10 requests to make a judgement whether to move from closed to open state
+      slidingWindowSize: 10
+      #      setting to allow 2 requests when circuit breaker is in half_open_state
+      permittedNumberOfCallsInHalfOpenState: 2
+      #      setting failure threshold, if 50% of requests get failed/slow responses, then move to open state
+      failureRateThreshold: 50
+      #      setting duration in which circuit will remain in open state
+      #      after 10000ms it will go into half_open_state, again checks if microservice working properly
+      #      decision will be taken accordingly
+      waitDurationInOpenState: 10000
+
+#retry pattern related
+resilience4j.retry:
+  configs:
+    #    setting default this means this props will be set for all retry patterns in the app
+    #    if you want to define props dfferently for each retry pattern then use retry pattern name instead of using default
+    #    retry pattern names are defined in AccountsController class like for ex: getBuildInfo
+    default:
+#      settign max retries
+      maxRetryAttempts: 3
+#      setting wait duration
+#      remember if you've circuit breaker defined which kicks in before this retry completes then
+#      circuit breaker kicks in before actually invoking fallback, so take care of this
+#      make sure waitDuration of retry is less than of circuitbreaker or define cutsom bean in
+#      gatewayserver main class, which forces circuit breaker to kick in later
+      waitDuration: 500
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+#      when you put this prop, only for below exceptions retry will not happen
+#      ignoreExceptions:
+#        - java.lang.NullPointerException
+#        - java.lang.RuntimeException
+#      when you put this prop, retry will happen only for below exceptions
+#      then youy don't need ignoreExceptions prop, as all other exceptions will be ignored
+      retryExceptions:
+        - java.util.concurrent.TimeoutException
+
+#rate limiter
+resilience4j.ratelimiter:
+  configs:
+    default:
+      timeoutDuration: 1000
+      limitRefreshPeriod: 5000
+      limitForPeriod: 1

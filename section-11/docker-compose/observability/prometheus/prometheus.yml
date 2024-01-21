@@ -1,8 +1,8 @@
 global:
 #  get metrics related from actuator/metrics every 5s
   scrape_interval:     5s # Set the scrape interval to every 5 seconds.
-#  re-evaluate metrics inside prometheus every 5s
-  evaluation_interval: 5s # Evaluate rules every 5 seconds.
+#  re-evaluate(update) metrics inside prometheus every 5s
+  evaluation_interval: 5s # Evaluate every 5 seconds.
 
 #defining all the microservices for which metrics should be evaluated
 scrape_configs:
