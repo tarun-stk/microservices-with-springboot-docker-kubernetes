@@ -28,7 +28,7 @@ spring:
 #           and mention
 #             search-locations: "file///[location of config folder inside machine]"
 #            advantages:
-#             using this folder approach, we can lock this folder for security reasons, and cab be accessed by authorised personnel
+#             using this folder approach, we can lock this folder for security reasons, and can be accessed by authorised personnel
 #        search-locations: "file///C:/config"
 #           3. using third approach using git hub repo to store our profiles
 #            change native to git saying that we're using git appraoch now
@@ -63,7 +63,7 @@ management:
       exposure:
         include: "*"
   #        props regarding liveness and readiness of the app
-  #  enabling thesse endpoints so that will be helpful while running thru containers
+  #  enabling these endpoints so that will be helpful while running thru containers
   #  actually accounts, cards & loans microservices are dependent on these service
   #  so we must make sure that both live-ness and readiness of this service are up
   #  Liveness: the app started but not sure if it is ready to accept requests, may be in background it is getting ready

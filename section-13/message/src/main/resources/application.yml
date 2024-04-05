@@ -1,0 +1,38 @@
+server:
+  port: 9010
+
+spring:
+  application:
+    name: "message"
+
+  cloud:
+    function:
+#      composing email and sms into a single business logic
+#      which means using endponit:http://localhost:9010/emailsms
+#      we can invoke both the methods defined in MessageFunctions at single time.
+      definition: email|sms
+#      event streaming related
+    stream:
+#      defining bindings
+      bindings:
+#        this is our binding name -> emailsms-in-0, emailsms is our default definition which is defined on line:13
+#        in means this is input for event streaming
+#        0 is indexing starting index
+        emailsms-in-0:
+#          destination means some sort of name, from where we need our events to arrive which is send-communication
+#          in our case accounts ms will send events to send-communication, from the same we're retracting the events
+          destination: send-communication
+#          grouping based on the app name
+          group: ${spring.application.name}
+        emailsms-out-0:
+#          this communication sent will be automatically triggerred because we're using spring cloud stream
+#          exchange name
+          destination: communication-sent
+
+#rabbit related props
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 10s

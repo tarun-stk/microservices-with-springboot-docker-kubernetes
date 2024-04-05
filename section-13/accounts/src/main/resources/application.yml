@@ -32,7 +32,28 @@ spring:
 #        enabling circuit breakers for openfeign clients
 #        if any of the openfeign client fails to receive response, then it will go into fallback
         enabled: true
+#        telling which function to execute on receiving an event from message broker
+    function:
+      definition: updateCommunication
+#        event streaming
+    stream:
+      bindings:
+#        accounts ms will be receiver for update event
+        updateCommunication-in-0:
+#          from destination name communication-sent, communication-sent to which message ms will push event
+          destination: communication-sent
+          group: ${spring.application.name}
+#          sending event to the destination send-communication, from which message will retrieve event
+        sendCommunication-out-0:
+          destination: send-communication
 
+#          rabbitmq related props
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 10s
 
 management:
   endpoints:

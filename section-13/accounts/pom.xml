@@ -98,6 +98,17 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
+<!--		using spring cloud stream for event streaming-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream</artifactId>
+		</dependency>
+<!--		using rabbit mq as event broker-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+		</dependency>
+
 	</dependencies>
 
 <!--	to integrate spring boot with spring cloud-->
@@ -128,9 +139,13 @@
 				<version>3.3.2</version>
 				<configuration>
 					<to>
-						<image>tarunkumarstk/${project.artifactId}:s11</image>
+						<image>tarunkumarstk/${project.artifactId}:s13</image>
 					</to>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>

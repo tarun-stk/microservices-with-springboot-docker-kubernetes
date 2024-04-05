@@ -24,3 +24,9 @@ management:
       health:
         probes:
           enabled: true
+
+  endpoint:
+    health:
+      probes:
+        enabled: true
+        include: liveness,readiness

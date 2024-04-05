@@ -60,7 +60,7 @@ DOCKER commands:
 	docker compose start
 	- this will start running the containers, but you've to make sure that containers are there(not deleted)
 	
-	docker rm <container_id>
+	docker rm <container_id/name can be a list of containers>
 	- deletes container with given id
 	
 	docker rmi myimage:latest
@@ -68,4 +68,68 @@ DOCKER commands:
 	
 	docker rmi IMAGE_ID
 	- deletes image with given id
+
+	docker image pull --all-tags <imagename>
+	- pulls all the images with imagename of different tags 
+
+	docker images <images>
+	- shows all images of different tags of given image which are there on local machine
+
+	docker run -d -p 3007:3006 -e MY_ROOT_PASSWORD=root --name mysql-container mysql:latest
+	- runs mysql image with name of container as mysql-container, and sets root as password for root user
+
+	docker image inspect <imagename>:<tagname>
+	- gives details of the image in json array format
+
+	docker container rename <oldname> <newname>
+	- renames the container 
+
+	docker container attach <containername>
+	- attaches container, means docker cli being generated in place, you can play around with container items
+
+	docker container run -itd --name cont_nginx-A -P img_expose
+	- container runs on internal port mentioned in Dockerfile, and maps it to local machine port whichever so is free to be consumed.
+	- you can later inspect the port number using below command
+	docker ps -a
+
+	docker container prune
+	- removes all stopped containers
+
+	docker network create --driver bridge <bridge_name>
+	- to create a network driver, containers talk to eachother over networks
+
+	docker network ls
+	- list downs all the networks
+
+	docker network connect <network_name> <container_name>
+	- connect container_name to networ_name
+
+	docker network disconnect <networkname> <container_name>
+	- disconnects container_name from networ_name
+
+	docker container run -itd --network host --name <containername> <imagename>:<tag>
+	- connect containername to network host at start 
+
+	docker network inspect <networkname>
+	- inspects a network
+
+	docker volume create <volume_name>
+	- to create a docker volume
+	- all the data will be stored in volume
+
+	docker run -d --volume <volumne_name>:/folerlocaiton <container_name>
+	- creates and assigns a volume to container at start
+
+	docker volume ls
+	- lists down all volumes
+
+	docker volume ls --filter "dangling=true"
+	- dangling=true -> volumes that are yet not assigned to any container
+
+	docker volume inspect <volume_name>
+	- inspects all the volumes
+
+	docker volume rm <volume_name>
+	- removes volume only if it is not assigned to any container, if assigned throws out warning that a container being using this
+
 	

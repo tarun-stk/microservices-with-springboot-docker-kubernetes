@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.2.2</version>
+		<version>3.1.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.eazybytes</groupId>
@@ -15,21 +15,65 @@
 	<description>Message microservice, which receives events from Rabbit MQ, and then processes them</description>
 	<properties>
 		<java.version>17</java.version>
-		<spring-cloud.version>2023.0.0</spring-cloud.version>
+		<spring-cloud.version>2022.0.4</spring-cloud.version>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter</artifactId>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter</artifactId>-->
+<!--		</dependency>-->
+<!--&lt;!&ndash;		enabling functional coding&ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-function-context</artifactId>-->
+<!--		</dependency>-->
+<!--&lt;!&ndash;		when you use this, u can expose your functions as rest api's-->
+<!--			for example-->
+<!--			@Bean-->
+<!--    public Function<AccountsMsgDto, AccountsMsgDto> email(){-->
+<!--        return accountsMsgDto -> {-->
+<!--            log.info("Sending email with the details: " + accountsMsgDto.toString());-->
+<!--            return accountsMsgDto;-->
+<!--        };-->
+<!--    }-->
+<!--    	now this method will be exposed as post method at endpoint /email&ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.cloud</groupId>-->
+<!--			<artifactId>spring-cloud-starter-function-web</artifactId>-->
+<!--		</dependency>-->
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-starter-test</artifactId>-->
+<!--			<scope>test</scope>-->
+<!--		</dependency>-->
+
+<!--		commmented above dependencies -->
+
+<!--		this is required for event streaming-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-function-context</artifactId>
+			<artifactId>spring-cloud-stream</artifactId>
 		</dependency>
-
+<!--		rabbit MQ related dependency-->
+<!--		Using spring cloud streaming, developer cam focus more on business logic and client requirements
+		all the infrastructre overhead is now taken care by spring-cloud-strean
+		before this developer has to manually do all the work by writing different classes and implementing in built suporitn interfaces
+		and if they watn to change rabiitMq to Kafka, they'd to change all the code
+		now you've to just replace the dependency with the new one-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+		</dependency>
+<!--		unit testing related-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-stream-test-binder</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -50,6 +94,16 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.3.2</version>
+				<configuration>
+					<to>
+						<image>tarunkumarstk/${project.artifactId}:s13</image>
+					</to>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

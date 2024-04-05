@@ -5,10 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac030a64-7baa-4d28-a2ba-b3c0aee3020f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose/default/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/RequestTraceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/RequestTraceFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/ResponseTraceFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/gatewayserver/src/main/java/com/eazybytes/gatewayserver/filters/ResponseTraceFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/dto/AccountsMsgDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/functions/AccountsFunctions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/message/src/main/java/com/eazybytes/message/dto/AccountsMsgDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../section-13/message/src/main/java/com/eazybytes/message/functions/MessageFunctions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/accounts/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/accounts/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/entity/Accounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/entity/Accounts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/service/IAccountsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/service/IAccountsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/service/impl/AccountsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/java/com/eazybytes/accounts/service/impl/AccountsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/accounts/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/accounts/src/main/resources/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/accounts/src/main/resources/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/message/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/message/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-13/message/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/../section-13/message/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-6/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-6/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-6/v2-spring-cloud-config/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-6/v2-spring-cloud-config/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../section-6/v2-spring-cloud-config/configserver/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../section-6/v2-spring-cloud-config/configserver/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +51,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Enfec Solutions/Documents/Master Microservices with SpringBoot, Docker & Kubernetes/section-10",
+    "last_opened_file_path": "C:/Users/Enfec Solutions/Documents/Master-Microservices-with-SpringBoot-Docker-and-Kubernetes/section-10",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
