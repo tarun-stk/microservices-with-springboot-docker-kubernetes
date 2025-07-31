@@ -5,7 +5,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 // changes name of schemas in swagger home page, giving them more meaningful names and description avoidign technical terms
 @Schema(  //open api related anno
@@ -13,6 +16,9 @@ import lombok.Data;
         description = "Schema to hold Customer and Account information"
 )
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class CustomerDto {
 
 //    Validation annos

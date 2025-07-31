@@ -16,7 +16,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 /*@ComponentScans({ @ComponentScan("com.eazybytes.accounts.controller") })
 @EnableJpaRepositories("com.eazybytes.accounts.repository")
 @EntityScan("com.eazybytes.accounts.model")*/
-@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl") // -> enabling jpa auditing,  //-> give who is your auditor
 //Open api related documentation.  these will reflect on swagger home page
 @OpenAPIDefinition(
 		info = @Info(
